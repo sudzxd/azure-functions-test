@@ -5,8 +5,8 @@
 Fast, ergonomic, type-safe mock objects for testing Azure Functions. No runtime, no Azurite, no boilerplate.
 
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
-[![Tests](https://img.shields.io/badge/tests-244%20passing-green.svg)](https://github.com/yourusername/azure-functions-test)
-[![Coverage](https://img.shields.io/badge/coverage-95.58%25-brightgreen.svg)](https://github.com/yourusername/azure-functions-test)
+[![Tests](https://img.shields.io/badge/tests-143%20passing-green.svg)](https://github.com/sudzxd/azure-functions-test)
+[![Coverage](https://img.shields.io/badge/coverage-81.31%25-brightgreen.svg)](https://github.com/sudzxd/azure-functions-test)
 [![Code Style: Ruff](https://img.shields.io/badge/code%20style-ruff-black.svg)](https://github.com/astral-sh/ruff)
 [![Type Checked: Pyright](https://img.shields.io/badge/type%20checked-pyright-blue.svg)](https://github.com/microsoft/pyright)
 
@@ -58,20 +58,21 @@ def test_process_order():
 - Event Grid (with custom and Azure system events)
 
 ✅ **Zero Runtime Dependency**
-- Pure Python mocks using real Azure SDK classes
+- Pure Python mocks using Pydantic dataclasses
 - No `func start` required
 - No Azurite or Docker needed
 - Tests run in milliseconds, not seconds
 
 ✅ **Type-Safe**
-- Full Pyright strict mode coverage
+- Full Pyright strict mode coverage (0 errors)
+- Structural typing with Protocol types
 - Auto-complete in VS Code
 - Catch errors at test time, not runtime
 
 ✅ **SDK-Compatible**
 - Drop-in replacements for `azure-functions` types
 - All methods and properties work (`get_body()`, `get_json()`, etc.)
-- Real SDK classes under the hood for maximum authenticity
+- Implements Azure SDK protocols for maximum compatibility
 
 ✅ **Minimal Ceremony**
 - Simple factory functions with smart defaults
@@ -90,7 +91,7 @@ def test_process_order():
 **Note:** Not yet published to PyPI. Install from source:
 
 ```bash
-git clone https://github.com/yourusername/azure-functions-test
+git clone https://github.com/sudzxd/azure-functions-test
 cd azure-functions-test
 uv sync --all-extras
 ```
@@ -311,27 +312,31 @@ def test_process_order():
 
 ## Status
 
-**✅ Week 3 Mocks Complete - 244 Tests Passing**
+**✅ Week 3 Complete - 143 Tests Passing**
 
-All 6 core trigger types implemented and tested:
-- ✅ Queue Storage (31 tests, 97.14% coverage)
-- ✅ HTTP Request (52 tests, 96.10% coverage)
-- ✅ Timer (22 tests, 100% coverage)
-- ✅ Blob Storage (29 tests, 100% coverage)
-- ✅ Service Bus (43 tests, 94.20% coverage)
-- ✅ Event Grid (28 tests, 100% coverage)
+All 6 core trigger types implemented and tested with comprehensive documentation:
+- ✅ Queue Storage mock with Pydantic validation
+- ✅ HTTP Request mock with flexible body types
+- ✅ Timer mock with past-due support
+- ✅ Blob Storage mock with stream support
+- ✅ Service Bus mock with session/dead-letter support
+- ✅ Event Grid mock with custom events
 
-**Overall:** 244 tests passing, 95.58% coverage
+**Metrics:**
+- 143 tests passing
+- 81.31% code coverage
+- Pyright strict mode: 0 errors
+- Complete API documentation
 
 ---
 
 ## Roadmap
 
-- [x] **Week 1:** Core infrastructure and `BaseMock` ✅
+- [x] **Week 1:** Core infrastructure and type system ✅
 - [x] **Week 2:** Core mocks (Queue, HTTP, Timer, Blob) ✅
-- [x] **Week 3 (Mocks):** Extended mocks (ServiceBus, EventGrid) ✅
-- [ ] **Week 3 (Docs):** Documentation and examples ⏳
-- [ ] **Week 4:** CI/CD + Alpha release
+- [x] **Week 3:** Extended mocks (ServiceBus, EventGrid) ✅
+- [x] **Week 3:** Documentation and API reference ✅
+- [ ] **Week 4:** CI/CD + Alpha release ⏳
 - [ ] **Week 5:** Advanced features + Cosmos mock
 - [ ] **Week 6:** Beta release + community feedback
 - [ ] **Post-Launch:** Stable v1.0.0 release
@@ -384,7 +389,7 @@ See inline docstrings for full parameter documentation.
 ## Design Principles
 
 1. **Zero Runtime Dependency** - No Azure Functions runtime or Azurite required
-2. **Real SDK Classes** - Uses `azure-functions` SDK types for maximum authenticity
+2. **Structural Typing** - Uses Protocol types for duck-typed compatibility with Azure SDK
 3. **Minimal Ceremony** - Only specify data you care about, sensible defaults for the rest
 4. **Explicit Over Implicit** - Output bindings captured explicitly, no magic
 5. **Fail Fast, Fail Clear** - Type errors caught at test time with clear messages
@@ -395,7 +400,12 @@ See [ARCHITECTURE.md](./ARCHITECTURE.md) for full design rationale.
 
 ## Documentation
 
-- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Complete technical specification and design
+- **[API Reference](./docs/api/)** - Complete API documentation
+  - [Mocks API](./docs/api/mocks.md) - All 6 mock functions
+  - [Context API](./docs/api/context.md) - Output binding capture
+  - [Protocols](./docs/api/protocols.md) - Type definitions
+- **[Examples](./examples/basic/)** - Working code examples for all triggers
+- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Technical specification and design
 - **[PROJECT_PLAN.md](./PROJECT_PLAN.md)** - Week-by-week implementation roadmap
 - **[STYLE_GUIDE.md](./STYLE_GUIDE.md)** - Coding standards for contributors
 
@@ -408,17 +418,17 @@ Contributions welcome! See [STYLE_GUIDE.md](./STYLE_GUIDE.md) for coding standar
 **Development Setup:**
 
 ```bash
-git clone https://github.com/yourusername/azure-functions-test
+git clone https://github.com/sudzxd/azure-functions-test
 cd azure-functions-test
 uv sync --all-extras
-uv run pytest
+PYTHONPATH=src uv run pytest
 ```
 
 **Run all checks:**
 ```bash
-uv run ruff check .        # Linting
-uv run pyright             # Type checking
-uv run pytest --cov        # Tests with coverage
+uv run ruff check .              # Linting
+PYTHONPATH=src uv run pyright    # Type checking
+PYTHONPATH=src uv run pytest     # Tests with coverage
 ```
 
 ---
