@@ -208,5 +208,4 @@ msg.invalid_method()  # ✗ Type error: method doesn't exist
 - [Mock API Reference](mocks.md) - Detailed docs for all mock functions
 - [Context API Reference](context.md) - Testing context and output capture
 - [Protocols Reference](protocols.md) - Protocol type definitions
-- [Testing Guides](../guides/) - Comprehensive testing patterns
 - [Examples](../../examples/) - Real-world code samples

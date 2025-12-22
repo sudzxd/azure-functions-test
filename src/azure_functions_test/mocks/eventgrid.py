@@ -6,6 +6,8 @@ with Pydantic validation and full type safety.
 
 from __future__ import annotations
 
+import uuid
+
 # =============================================================================
 # IMPORTS
 # =============================================================================
@@ -20,6 +22,7 @@ from pydantic.dataclasses import dataclass
 # Project/Local
 from .._internal import get_logger
 from ..protocols import EventGridEventProtocol
+from .base import filter_none
 
 # =============================================================================
 # LOGGER
@@ -68,7 +71,7 @@ class EventGridEventMock:
     )
     subject: str = Field(default="test/subject")
     event_type: str = Field(default="Test.Event")
-    event_time: datetime | None = Field(default_factory=lambda: datetime.now(UTC))
+    event_time: datetime = Field(default_factory=lambda: datetime.now(UTC))
     data_version: str = Field(default="1.0")
     data: dict[str, Any] = Field(default_factory=dict)
 
@@ -169,19 +172,150 @@ def mock_event_grid_event(
         event_type or "Test.Event",
     )
 
-    # Build kwargs
-    kwargs: dict[str, Any] = {"data": data or {}}
-    if id is not None:
-        kwargs["id"] = id
-    if topic is not None:
-        kwargs["topic"] = topic
-    if subject is not None:
-        kwargs["subject"] = subject
-    if event_type is not None:
-        kwargs["event_type"] = event_type
-    if event_time is not None:
-        kwargs["event_time"] = event_time
-    if data_version is not None:
-        kwargs["data_version"] = data_version
+    return EventGridEventMock(
+        **filter_none(
+            data=data,
+            id=id,
+            topic=topic,
+            subject=subject,
+            event_type=event_type,
+            event_time=event_time,
+            data_version=data_version,
+        )
+    )
 
-    return EventGridEventMock(**kwargs)
+
+# =============================================================================
+# FACTORY METHODS FOR COMMON SCENARIOS
+# =============================================================================
+
+
+def create_blob_created_event(
+    blob_url: str,
+    *,
+    container_name: str = "test-container",
+    blob_name: str | None = None,
+    storage_account: str = "teststorageaccount",
+    **kwargs: Any,
+) -> EventGridEventProtocol:
+    """Create a Blob Storage 'BlobCreated' event.
+
+    Args:
+        blob_url: URL of the created blob.
+        container_name: Container name.
+        blob_name: Blob name (extracted from URL if not provided).
+        storage_account: Storage account name.
+        **kwargs: Additional event properties.
+
+    Returns:
+        EventGridEventMock configured for blob creation.
+
+    Examples:
+        >>> event = create_blob_created_event(
+        ...     "https://test.blob.core.windows.net/container/file.txt"
+        ... )
+        >>> event.event_type
+        'Microsoft.Storage.BlobCreated'
+    """
+    if blob_name is None:
+        blob_name = blob_url.split("/")[-1]
+
+    return mock_event_grid_event(
+        data={
+            "api": "PutBlob",
+            "clientRequestId": str(uuid.uuid4()),
+            "requestId": str(uuid.uuid4()),
+            "eTag": f'"0x{uuid.uuid4().hex[:16].upper()}"',
+            "contentType": "application/octet-stream",
+            "contentLength": 1024,
+            "blobType": "BlockBlob",
+            "url": blob_url,
+            "sequencer": f"{datetime.now().strftime('%Y%m%d%H%M%S')}0000000000000",
+        },
+        event_type="Microsoft.Storage.BlobCreated",
+        subject=f"/blobServices/default/containers/{container_name}/blobs/{blob_name}",
+        topic=f"/subscriptions/{uuid.uuid4()}/resourceGroups/test-rg/providers/Microsoft.Storage/storageAccounts/{storage_account}",
+        **kwargs,
+    )
+
+
+def create_blob_deleted_event(
+    blob_url: str,
+    *,
+    container_name: str = "test-container",
+    blob_name: str | None = None,
+    storage_account: str = "teststorageaccount",
+    **kwargs: Any,
+) -> EventGridEventProtocol:
+    """Create a Blob Storage 'BlobDeleted' event.
+
+    Args:
+        blob_url: URL of the deleted blob.
+        container_name: Container name.
+        blob_name: Blob name (extracted from URL if not provided).
+        storage_account: Storage account name.
+        **kwargs: Additional event properties.
+
+    Returns:
+        EventGridEventMock configured for blob deletion.
+
+    Examples:
+        >>> event = create_blob_deleted_event(
+        ...     "https://test.blob.core.windows.net/container/old-file.txt"
+        ... )
+        >>> event.event_type
+        'Microsoft.Storage.BlobDeleted'
+    """
+    if blob_name is None:
+        blob_name = blob_url.split("/")[-1]
+
+    return mock_event_grid_event(
+        data={
+            "api": "DeleteBlob",
+            "clientRequestId": str(uuid.uuid4()),
+            "requestId": str(uuid.uuid4()),
+            "contentType": "application/octet-stream",
+            "blobType": "BlockBlob",
+            "url": blob_url,
+            "sequencer": f"{datetime.now().strftime('%Y%m%d%H%M%S')}0000000000000",
+        },
+        event_type="Microsoft.Storage.BlobDeleted",
+        subject=f"/blobServices/default/containers/{container_name}/blobs/{blob_name}",
+        topic=f"/subscriptions/{uuid.uuid4()}/resourceGroups/test-rg/providers/Microsoft.Storage/storageAccounts/{storage_account}",
+        **kwargs,
+    )
+
+
+def create_custom_event(
+    data: dict[str, Any],
+    *,
+    event_type: str = "Custom.Application.Event",
+    subject: str = "custom/event",
+    **kwargs: Any,
+) -> EventGridEventProtocol:
+    """Create a custom application Event Grid event.
+
+    Args:
+        data: Custom event data.
+        event_type: Custom event type name.
+        subject: Event subject path.
+        **kwargs: Additional event properties.
+
+    Returns:
+        EventGridEventMock configured for custom events.
+
+    Examples:
+        >>> event = create_custom_event(
+        ...     {"userId": 123, "action": "login"},
+        ...     event_type="MyApp.User.Login"
+        ... )
+        >>> event.event_type
+        'MyApp.User.Login'
+    """
+    return mock_event_grid_event(
+        data=data,
+        event_type=event_type,
+        subject=subject,
+        topic=f"/subscriptions/{uuid.uuid4()}/resourceGroups/test-rg/providers/Microsoft.EventGrid/topics/custom-topic",
+        **kwargs,
+    )

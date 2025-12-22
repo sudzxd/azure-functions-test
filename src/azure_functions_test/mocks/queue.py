@@ -15,12 +15,13 @@ from datetime import UTC, datetime
 from typing import Any
 
 # Third-party
-from pydantic import Field, field_validator
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 # Project/Local
 from .._internal import get_logger, serialize_to_bytes
 from ..protocols import QueueMessageProtocol
+from .base import filter_none
 
 # =============================================================================
 # LOGGER
@@ -79,33 +80,6 @@ class QueueMessageMock:
     time_next_visible: datetime | None = Field(default=None)
     pop_receipt: str | None = Field(default="test-pop-receipt")
 
-    @field_validator(
-        "id", "dequeue_count", "pop_receipt", "insertion_time", mode="before"
-    )
-    @classmethod
-    def _replace_none_with_default(cls, v: Any, info: Any) -> Any:
-        """Replace None with field default.
-
-        Pydantic uses None when explicitly passed.
-
-        Args:
-            v: Value to validate.
-            info: Validation info.
-
-        Returns:
-            Original value or default if None.
-        """
-        if v is None:
-            if info.field_name == "id":
-                return "test-message-id"
-            if info.field_name == "dequeue_count":
-                return 1
-            if info.field_name == "pop_receipt":
-                return "test-pop-receipt"
-            if info.field_name == "insertion_time":
-                return datetime.now(UTC)
-        return v
-
     def get_body(self) -> bytes:
         """Return message content as bytes.
 
@@ -133,7 +107,13 @@ class QueueMessageMock:
             >>> msg.get_json()
             {'key': 'value'}
         """
-        return json.loads(self.body.decode("utf-8"))
+        try:
+            return json.loads(self.body.decode("utf-8"))
+        except json.JSONDecodeError as e:
+            raise ValueError(f"Invalid JSON in queue message body: {e}") from e
+        except UnicodeDecodeError as e:
+            msg = f"Unable to decode queue message body as UTF-8: {e}"
+            raise ValueError(msg) from e
 
     def __repr__(self) -> str:
         """Return string representation.
@@ -229,13 +209,78 @@ def mock_queue_message(
     # Serialize body if provided
     serialized_body = serialize_to_bytes(body, allow_list=True)
 
-    # Build and return the mock (Pydantic handles defaults)
     return QueueMessageMock(
-        body=serialized_body,
-        id=id,
-        dequeue_count=dequeue_count,
-        expiration_time=expiration_time,
-        insertion_time=insertion_time,
-        time_next_visible=time_next_visible,
-        pop_receipt=pop_receipt,
+        **filter_none(
+            body=serialized_body,
+            id=id,
+            dequeue_count=dequeue_count,
+            expiration_time=expiration_time,
+            insertion_time=insertion_time,
+            time_next_visible=time_next_visible,
+            pop_receipt=pop_receipt,
+        )
     )
+
+
+# =============================================================================
+# FACTORY METHODS FOR COMMON SCENARIOS
+# =============================================================================
+
+
+def create_poison_message(
+    body: dict[Any, Any] | list[Any] | str | bytes | None = None,
+    *,
+    dequeue_count: int = 6,
+    **kwargs: Any,
+) -> QueueMessageProtocol:
+    """Create a poison queue message (high dequeue count).
+
+    Args:
+        body: Message body.
+        dequeue_count: Number of failed processing attempts (>5 = poison).
+        **kwargs: Additional message properties.
+
+    Returns:
+        QueueMessageMock configured as a poison message.
+
+    Examples:
+        >>> msg = create_poison_message({"problematic": "data"})
+        >>> msg.dequeue_count > 5
+        True
+    """
+    return mock_queue_message(
+        body,
+        dequeue_count=dequeue_count,
+        **kwargs,
+    )
+
+
+def create_batch_messages(
+    bodies: list[dict[Any, Any] | list[Any] | str | bytes],
+    **kwargs: Any,
+) -> list[QueueMessageProtocol]:
+    """Create multiple queue messages for batch processing tests.
+
+    Args:
+        bodies: List of message bodies.
+        **kwargs: Common properties for all messages.
+
+    Returns:
+        List of QueueMessageMock instances.
+
+    Examples:
+        >>> messages = create_batch_messages([
+        ...     {"id": 1, "data": "first"},
+        ...     {"id": 2, "data": "second"}
+        ... ])
+        >>> len(messages)
+        2
+    """
+    return [
+        mock_queue_message(
+            body,
+            id=f"batch-message-{i}",
+            **kwargs,
+        )
+        for i, body in enumerate(bodies)
+    ]
