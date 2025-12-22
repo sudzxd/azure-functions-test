@@ -1,0 +1,68 @@
+name: Documentation
+description: Suggest improvements to documentation
+title: "[Docs]: "
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve our documentation!
+
+  - type: dropdown
+    id: doc_type
+    attributes:
+      label: Documentation Type
+      description: What kind of documentation needs improvement?
+      options:
+        - README
+        - API Documentation
+        - Examples
+        - Contributing Guide
+        - Code Comments
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue
+    attributes:
+      label: Issue
+      description: What's unclear, missing, or incorrect?
+      placeholder: The README doesn't explain how to use custom metadata with mocks...
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested Improvement
+      description: How should the documentation be improved?
+      placeholder: |
+        Add a section showing:
+        - How to add custom metadata
+        - Common use cases
+        - Example with real scenario
+    validations:
+      required: true
+
+  - type: textarea
+    id: location
+    attributes:
+      label: Location
+      description: Where in the docs is this (file, section, line number)?
+      placeholder: README.md, line 150, "HTTP Request" section
+
+  - type: textarea
+    id: example
+    attributes:
+      label: Example
+      description: If applicable, provide an example of what you'd like to see
+      render: markdown
+      placeholder: |
+        ```python
+        # Example showing custom metadata
+        msg = mock_queue_message(
+            {"data": "value"},
+            metadata={"custom_header": "value"}
+        )
+        ```
