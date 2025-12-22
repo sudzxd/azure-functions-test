@@ -1,0 +1,84 @@
+name: Feature Request
+description: Suggest a new feature or enhancement
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a feature! Please describe what you'd like to see.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What problem would this feature solve?
+      placeholder: I'm trying to test Cosmos DB triggers, but there's no mock available...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How would you like this to work?
+      placeholder: |
+        Add a mock_cosmos_db_trigger() function that:
+        - Accepts a list of documents
+        - Supports partition keys
+        - Works with FunctionTestContext
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Have you considered any alternative solutions?
+      placeholder: I tried using a custom class, but it doesn't implement all the required methods...
+
+  - type: textarea
+    id: example
+    attributes:
+      label: Example Usage
+      description: Show how you'd like to use this feature
+      render: python
+      placeholder: |
+        from azure_functions_test import mock_cosmos_db_trigger
+
+        trigger = mock_cosmos_db_trigger([
+            {"id": "1", "name": "Alice"},
+            {"id": "2", "name": "Bob"},
+        ])
+
+        my_function(trigger)
+    validations:
+      required: false
+
+  - type: dropdown
+    id: compatibility
+    attributes:
+      label: Azure Functions Version
+      description: Which azure-functions version would this target?
+      options:
+        - ">=1.17.0 (current)"
+        - ">=1.18.0 (future)"
+        - "All versions"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      description: Would you be willing to contribute this feature?
+      options:
+        - label: I'm willing to submit a PR for this feature
+          required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any additional context, mockups, or references
+      placeholder: Links to Azure Functions docs, similar implementations, etc.
