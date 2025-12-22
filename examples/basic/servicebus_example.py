@@ -109,7 +109,7 @@ def process_with_retry_logic(
     """
     max_retries = 3
 
-    if msg.delivery_count is not None and msg.delivery_count > max_retries:
+    if msg.delivery_count > max_retries:
         # Move to dead letter queue
         dead_letter.set(
             json.dumps(

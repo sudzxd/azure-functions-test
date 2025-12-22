@@ -12,6 +12,7 @@ from __future__ import annotations
 # Standard Library
 import json
 from typing import Any
+from urllib.parse import parse_qs
 
 # Third-party
 from pydantic import Field
@@ -70,6 +71,37 @@ class HttpRequestMock:
     params: dict[str, str] = Field(default_factory=dict)
     route_params: dict[str, str] = Field(default_factory=dict)
     body: bytes = Field(default=b"")
+    _form_cache: dict[str, str] | None = Field(default=None, init=False, repr=False)
+
+    @property
+    def form(self) -> dict[str, str]:
+        """Parse and return form data from application/x-www-form-urlencoded body.
+
+        Returns:
+            Dictionary of form field names to values. For fields with multiple
+            values, only the last value is returned.
+
+        Examples:
+            >>> req = HttpRequestMock(
+            ...     body=b"name=Alice&age=30",
+            ...     headers={"Content-Type": "application/x-www-form-urlencoded"}
+            ... )
+            >>> req.form["name"]
+            'Alice'
+            >>> req.form["age"]
+            '30'
+        """
+        if self._form_cache is None:
+            content_type = self.headers.get("Content-Type", "")
+            if "application/x-www-form-urlencoded" in content_type:
+                # Parse URL-encoded form data
+                body_str = self.body.decode("utf-8")
+                parsed = parse_qs(body_str, keep_blank_values=True)
+                # parse_qs returns lists for each key; take the last value
+                self._form_cache = {k: v[-1] for k, v in parsed.items()}
+            else:
+                self._form_cache = {}
+        return self._form_cache
 
     def get_body(self) -> bytes:
         """Return request body as bytes.
@@ -98,7 +130,12 @@ class HttpRequestMock:
             >>> req.get_json()
             {'key': 'value'}
         """
-        return json.loads(self.body.decode("utf-8"))
+        try:
+            return json.loads(self.body.decode("utf-8"))
+        except json.JSONDecodeError as e:
+            raise ValueError(f"Invalid JSON in HTTP request body: {e}") from e
+        except UnicodeDecodeError as e:
+            raise ValueError(f"Unable to decode HTTP request body as UTF-8: {e}") from e
 
     def __repr__(self) -> str:
         """Return string representation.

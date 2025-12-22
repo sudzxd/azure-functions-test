@@ -28,7 +28,7 @@ Each mock function creates a test double for an Azure Functions trigger input. A
 
 Create a mock Queue Storage message.
 
-### Signature
+### `mock_queue_message()` Signature
 
 ```python
 def mock_queue_message(
@@ -43,7 +43,7 @@ def mock_queue_message(
 ) -> QueueMessageProtocol
 ```
 
-### Parameters
+### `mock_queue_message()` Parameters
 
 | Parameter           | Type                                   | Default              | Description                                      |
 | ------------------- | -------------------------------------- | -------------------- | ------------------------------------------------ |
@@ -55,11 +55,11 @@ def mock_queue_message(
 | `time_next_visible` | `datetime \| None`                     | `None`               | When the message will be visible next            |
 | `pop_receipt`       | `str \| None`                          | `"test-pop-receipt"` | Pop receipt token for operations                 |
 
-### Returns
+### `mock_queue_message()` Returns
 
 `QueueMessageProtocol` - A mock queue message implementing the Azure SDK interface.
 
-### Examples
+### `mock_queue_message()` Examples
 
 **Simple JSON message:**
 
@@ -95,7 +95,7 @@ if msg.dequeue_count > 5:
 
 Create a mock HTTP request.
 
-### Signature
+### `mock_http_request()` Signature
 
 ```python
 def mock_http_request(
@@ -109,7 +109,7 @@ def mock_http_request(
 ) -> HttpRequestProtocol
 ```
 
-### Parameters
+### `mock_http_request()` Parameters
 
 | Parameter      | Type                           | Default              | Description                                |
 | -------------- | ------------------------------ | -------------------- | ------------------------------------------ |
@@ -120,11 +120,11 @@ def mock_http_request(
 | `params`       | `dict[str, str] \| None`       | `{}`                 | Query parameters                           |
 | `route_params` | `dict[str, str] \| None`       | `{}`                 | Route parameters (e.g., `/users/{id}`)     |
 
-### Returns
+### `mock_http_request()` Returns
 
 `HttpRequestProtocol` - A mock HTTP request implementing the Azure SDK interface.
 
-### Examples
+### `mock_http_request()` Examples
 
 **Simple GET request:**
 
@@ -162,32 +162,52 @@ req = mock_http_request(
 user_id = req.route_params["user_id"]
 ```
 
+**Form data (application/x-www-form-urlencoded):**
+
+```python
+req = mock_http_request(
+    body=b"name=Alice&age=30&email=alice%40example.com",
+    method="POST",
+    headers={"Content-Type": "application/x-www-form-urlencoded"}
+)
+# Form data is automatically parsed
+assert req.form["name"] == "Alice"
+assert req.form["age"] == "30"
+assert req.form["email"] == "alice@example.com"
+```
+
+> **Note:** The `form` property automatically parses URL-encoded form data when the Content-Type is `application/x-www-form-urlencoded`. Form data is cached for performance.
+
 ---
 
 ## `mock_timer_request()`
 
 Create a mock timer request.
 
-### Signature
+### `mock_timer_request()` Signature
 
 ```python
 def mock_timer_request(
     *,
     past_due: bool = False,
+    schedule_status: dict[str, Any] | None = None,
+    schedule: dict[str, Any] | None = None,
 ) -> TimerRequestProtocol
 ```
 
-### Parameters
+### `mock_timer_request()` Parameters
 
-| Parameter  | Type   | Default | Description                                  |
-| ---------- | ------ | ------- | -------------------------------------------- |
-| `past_due` | `bool` | `False` | Whether the timer is past its scheduled time |
+| Parameter         | Type                      | Default                          | Description                                       |
+| ----------------- | ------------------------- | -------------------------------- | ------------------------------------------------- |
+| `past_due`        | `bool`                    | `False`                          | Whether the timer is past its scheduled time      |
+| `schedule_status` | `dict[str, Any] \| None`  | Current time info                | Schedule status with Last/Next/LastUpdated times  |
+| `schedule`        | `dict[str, Any] \| None`  | `{}`                             | Timer schedule configuration (e.g., cron expression) |
 
-### Returns
+### `mock_timer_request()` Returns
 
 `TimerRequestProtocol` - A mock timer request implementing the Azure SDK interface.
 
-### Examples
+### `mock_timer_request()` Examples
 
 **Normal timer execution:**
 
@@ -207,13 +227,33 @@ if timer.past_due:
     pass
 ```
 
+**Timer with schedule information:**
+
+```python
+from datetime import datetime, UTC, timedelta
+
+now = datetime.now(UTC)
+timer = mock_timer_request(
+    schedule_status={
+        "Last": now - timedelta(hours=1),
+        "Next": now + timedelta(hours=1),
+        "LastUpdated": now
+    },
+    schedule={"AdjustForDST": True, "Expression": "0 0 */6 * * *"}
+)
+assert timer.schedule_status["Last"] < timer.schedule_status["Next"]
+assert timer.schedule["Expression"] == "0 0 */6 * * *"
+```
+
+> **Note:** The `schedule_status` property contains Last/Next/LastUpdated datetimes. The `schedule` property holds timer configuration like cron expressions.
+
 ---
 
 ## `mock_blob()`
 
 Create a mock Blob Storage input stream.
 
-### Signature
+### `mock_blob()` Signature
 
 ```python
 def mock_blob(
@@ -224,7 +264,7 @@ def mock_blob(
 ) -> InputStreamProtocol
 ```
 
-### Parameters
+### `mock_blob()` Parameters
 
 | Parameter | Type                   | Default           | Description                             |
 | --------- | ---------------------- | ----------------- | --------------------------------------- |
@@ -232,11 +272,11 @@ def mock_blob(
 | `name`    | `str \| None`          | `"test-blob.txt"` | Blob name                               |
 | `uri`     | `str \| None`          | Test URI          | Blob's primary location URI             |
 
-### Returns
+### `mock_blob()` Returns
 
 `InputStreamProtocol` - A mock blob input stream implementing the Azure SDK interface.
 
-### Examples
+### `mock_blob()` Examples
 
 **Text file blob:**
 
@@ -275,7 +315,7 @@ chunk2 = blob.read(7)  # b", World"
 
 Create a mock Service Bus message.
 
-### Signature
+### `mock_service_bus_message()` Signature
 
 ```python
 def mock_service_bus_message(
@@ -297,7 +337,7 @@ def mock_service_bus_message(
 ) -> ServiceBusMessageProtocol
 ```
 
-### Parameters
+### `mock_service_bus_message()` Parameters
 
 | Parameter                       | Type                           | Default              | Description                                |
 | ------------------------------- | ------------------------------ | -------------------- | ------------------------------------------ |
@@ -316,11 +356,11 @@ def mock_service_bus_message(
 | `application_properties`        | `dict[str, Any] \| None`       | `{}`                 | Application-specific properties            |
 | `user_properties`               | `dict[str, Any] \| None`       | `{}`                 | User-defined properties                    |
 
-### Returns
+### `mock_service_bus_message()` Returns
 
 `ServiceBusMessageProtocol` - A mock Service Bus message implementing the Azure SDK interface.
 
-### Examples
+### `mock_service_bus_message()` Examples
 
 **Basic message:**
 
@@ -359,7 +399,7 @@ msg = mock_service_bus_message(
 
 Create a mock Event Grid event.
 
-### Signature
+### `mock_event_grid_event()` Signature
 
 ```python
 def mock_event_grid_event(
@@ -374,7 +414,7 @@ def mock_event_grid_event(
 ) -> EventGridEventProtocol
 ```
 
-### Parameters
+### `mock_event_grid_event()` Parameters
 
 | Parameter      | Type                     | Default           | Description                  |
 | -------------- | ------------------------ | ----------------- | ---------------------------- |
@@ -386,11 +426,11 @@ def mock_event_grid_event(
 | `event_time`   | `datetime \| None`       | Current UTC       | When the event occurred      |
 | `data_version` | `str \| None`            | `"1.0"`           | Schema version of event data |
 
-### Returns
+### `mock_event_grid_event()` Returns
 
 `EventGridEventProtocol` - A mock Event Grid event implementing the Azure SDK interface.
 
-### Examples
+### `mock_event_grid_event()` Examples
 
 **Blob created event:**
 
@@ -418,10 +458,72 @@ event = mock_event_grid_event(
 )
 ```
 
+### Event Grid Factory Functions
+
+For common Event Grid scenarios, convenience factory functions are available:
+
+#### `create_blob_created_event()`
+
+Create a Blob Storage 'BlobCreated' event with realistic Azure metadata.
+
+```python
+from azure_functions_test.mocks.eventgrid import create_blob_created_event
+
+event = create_blob_created_event(
+    "https://myaccount.blob.core.windows.net/container/file.txt",
+    container_name="uploads",
+    storage_account="myaccount"
+)
+assert event.event_type == "Microsoft.Storage.BlobCreated"
+assert event.get_json()["url"] == "https://myaccount.blob.core.windows.net/container/file.txt"
+```
+
+**Parameters:**
+- `blob_url` (str): URL of the created blob
+- `container_name` (str): Container name (default: "test-container")
+- `blob_name` (str | None): Blob name (extracted from URL if not provided)
+- `storage_account` (str): Storage account name (default: "teststorageaccount")
+
+#### `create_blob_deleted_event()`
+
+Create a Blob Storage 'BlobDeleted' event.
+
+```python
+from azure_functions_test.mocks.eventgrid import create_blob_deleted_event
+
+event = create_blob_deleted_event(
+    "https://myaccount.blob.core.windows.net/archive/old-file.txt"
+)
+assert event.event_type == "Microsoft.Storage.BlobDeleted"
+```
+
+**Parameters:** Same as `create_blob_created_event()`
+
+#### `create_custom_event()`
+
+Create a custom application Event Grid event.
+
+```python
+from azure_functions_test.mocks.eventgrid import create_custom_event
+
+event = create_custom_event(
+    data={"userId": 123, "action": "login"},
+    event_type="MyApp.User.Login",
+    subject="users/123/login"
+)
+assert event.event_type == "MyApp.User.Login"
+assert event.get_json()["userId"] == 123
+```
+
+**Parameters:**
+- `data` (dict[str, Any]): Custom event data
+- `event_type` (str): Custom event type (default: "Custom.Application.Event")
+- `subject` (str): Event subject path (default: "custom/event")
+
 ---
 
 ## See Also
 
-- [Context API](../context.md) - For capturing function outputs
-- [Protocols](../protocols.md) - Protocol definitions for type safety
+- [Context API](context.md) - For capturing function outputs
+- [Protocols](protocols.md) - Protocol definitions for type safety
 - [Examples](../../examples/) - Real-world usage examples

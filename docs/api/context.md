@@ -12,28 +12,28 @@ When testing Azure Functions, you often need to verify what data was written to 
 
 A test context for capturing Azure Functions output bindings.
 
-### Class Definition
+### `FunctionTestContext` Class Definition
 
 ```python
 class FunctionTestContext:
     """Test context for capturing Azure Functions output bindings."""
 ```
 
-### Methods
+### `FunctionTestContext` Methods
 
 #### `out(name: str) -> CapturedOutput[Any]`
 
 Register an output binding and return a capture object.
 
-**Parameters:**
+**`out()` Parameters:**
 
 - `name` (`str`): Name of the output binding (matches function.json binding name)
 
-**Returns:**
+**`out()` Returns:**
 
 - `CapturedOutput[Any]`: An output capture object that records the value when set
 
-**Example:**
+**`out()` Example:**
 
 ```python
 from azure_functions_test import FunctionTestContext
@@ -52,15 +52,15 @@ assert ctx.outputs["result"] == expected_value
 
 Check if an output binding has been set.
 
-**Parameters:**
+**`is_set()` Parameters:**
 
 - `name` (`str`): Name of the output binding
 
-**Returns:**
+**`is_set()` Returns:**
 
 - `bool`: `True` if the output was set, `False` otherwise
 
-**Example:**
+**`is_set()` Example:**
 
 ```python
 ctx = FunctionTestContext()
@@ -76,7 +76,7 @@ else:
     pass
 ```
 
-### Properties
+### `FunctionTestContext` Properties
 
 #### `outputs: dict[str, Any]`
 
@@ -84,7 +84,7 @@ Dictionary containing all captured output values.
 
 **Type:** `dict[str, Any]`
 
-**Example:**
+**`outputs` Example:**
 
 ```python
 ctx = FunctionTestContext()
@@ -110,7 +110,7 @@ for name, value in ctx.outputs.items():
 
 A generic output capture that records values written by the function.
 
-### Class Definition
+### `CapturedOutput[T]` Class Definition
 
 ```python
 @dataclass
@@ -118,17 +118,17 @@ class CapturedOutput(Out[T], Generic[T]):
     """Captures output binding values for testing."""
 ```
 
-### Methods
+### `CapturedOutput[T]` Methods
 
 #### `set(val: T) -> None`
 
 Set the output value (called by the function under test).
 
-**Parameters:**
+**`set()` Parameters:**
 
 - `val` (`T`): The value to write to the output binding
 
-**Example:**
+**`set()` Example:**
 
 ```python
 def process_order(msg: QueueMessage, output: Out[str]) -> None:
@@ -150,11 +150,11 @@ assert json.loads(ctx.outputs["result"])["status"] == "processed"
 
 Get the captured value.
 
-**Returns:**
+**`get()` Returns:**
 
 - `T | None`: The captured value, or `None` if not set
 
-**Example:**
+**`get()` Example:\*\***
 
 ```python
 output = ctx.out("result")
@@ -375,4 +375,3 @@ def test_function():
 
 - [Mock API Reference](mocks.md) - For creating test inputs
 - [Examples](../../examples/) - Real-world usage examples
-- [Testing Guide](../guides/testing-queue-functions.md) - Comprehensive testing patterns

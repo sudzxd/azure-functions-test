@@ -32,6 +32,7 @@ dev = [
     "ruff>=0.3",
     "bandit>=1.7",
     "pip-audit>=2.7",
+    "twine>=5.0",
 ]
 docs = [
     "mkdocs>=1.5",
@@ -43,10 +44,10 @@ docs = [
 # azure_functions_test = "azure_functions_test.fixtures.pytest_plugin"
 
 [project.urls]
-Homepage = "https://github.com/yourusername/azure-functions-test"
-Documentation = "https://yourusername.github.io/azure-functions-test"
-Repository = "https://github.com/yourusername/azure-functions-test"
-Changelog = "https://github.com/yourusername/azure-functions-test/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/sudzxd/azure-functions-test"
+Documentation = "https://sudzxd.github.io/azure-functions-test"
+Repository = "https://github.com/sudzxd/azure-functions-test"
+Changelog = "https://github.com/sudzxd/azure-functions-test/blob/main/CHANGELOG.md"
 
 [build-system]
 requires = ["hatchling", "hatch-vcs"]

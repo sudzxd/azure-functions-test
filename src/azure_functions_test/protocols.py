@@ -129,6 +129,11 @@ class HttpRequestProtocol(Protocol):
         """Route parameters from function.json as dictionary."""
         ...
 
+    @property
+    def form(self) -> dict[str, str]:
+        """Form data parsed from application/x-www-form-urlencoded body."""
+        ...
+
     def get_body(self) -> bytes:
         """Return request body as bytes.
 
@@ -158,11 +163,23 @@ class TimerRequestProtocol(Protocol):
 
     Attributes:
         past_due: Whether the timer is past its scheduled time.
+        schedule_status: Schedule status information dictionary.
+        schedule: The timer schedule (e.g., cron expression).
     """
 
     @property
     def past_due(self) -> bool:
         """Whether the timer is past its scheduled time."""
+        ...
+
+    @property
+    def schedule_status(self) -> dict[str, Any]:
+        """Schedule status information including last/next occurrences."""
+        ...
+
+    @property
+    def schedule(self) -> dict[str, Any]:
+        """Timer schedule configuration."""
         ...
 
 
@@ -243,7 +260,7 @@ class EventGridEventProtocol(Protocol):
         ...
 
     @property
-    def event_time(self) -> datetime | None:
+    def event_time(self) -> datetime:
         """UTC time the event was generated."""
         ...
 
@@ -315,12 +332,12 @@ class ServiceBusMessageProtocol(Protocol):
         ...
 
     @property
-    def delivery_count(self) -> int | None:
+    def delivery_count(self) -> int:
         """Number of times message has been delivered."""
         ...
 
     @property
-    def enqueued_time_utc(self) -> datetime | None:
+    def enqueued_time_utc(self) -> datetime:
         """UTC time when message was enqueued."""
         ...
 
