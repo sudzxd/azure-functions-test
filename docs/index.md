@@ -1,6 +1,7 @@
 # azure-functions-test
 
 > **Unit test Azure Functions without the runtime.**
+<!-- Updated: 2025-12-22 -->
 
 Fast, ergonomic, type-safe mock objects for testing Azure Functions. No runtime, no Azurite, no boilerplate.
 
