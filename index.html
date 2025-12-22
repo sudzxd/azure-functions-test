@@ -413,6 +413,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#versioning-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Versioning Strategy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#quick-example" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1027,6 +1038,18 @@
 <a href="https://github.com/microsoft/pyright"><img alt="Type Checked: Pyright" src="https://img.shields.io/badge/type%20checked-pyright-blue.svg" /></a></p>
 <p><strong>Requires Python 3.11+</strong> for optimal performance and modern syntax support.</p>
 <hr />
+<h2 id="versioning-strategy">Versioning Strategy<a class="headerlink" href="#versioning-strategy" title="Permanent link">&para;</a></h2>
+<p>This package follows <strong>version-compatible versioning</strong> with the <code>azure-functions</code> library:</p>
+<ul>
+<li><code>1.17.0a1</code> = Alpha release compatible with <code>azure-functions&gt;=1.17.0</code></li>
+<li><code>1.17.0</code> = Stable release for <code>azure-functions 1.17.x</code></li>
+<li><code>1.18.0</code> = When we add support for <code>azure-functions 1.18.x</code></li>
+</ul>
+<p><strong>Current compatibility:</strong>
+- Azure Functions: <code>&gt;=1.17.0</code>
+- Python: <code>3.11+</code>
+- Pydantic: <code>&gt;=2.0</code></p>
+<hr />
 <h2 id="quick-example">Quick Example<a class="headerlink" href="#quick-example" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">azure_functions_test</span><span class="w"> </span><span class="kn">import</span> <span class="n">mock_queue_message</span><span class="p">,</span> <span class="n">FunctionTestContext</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
@@ -1108,7 +1131,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>azure-functions-test
 </code></pre></div>
 <p>For the latest alpha release:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pip<span class="w"> </span>install<span class="w"> </span>azure-functions-test<span class="o">==</span><span class="m">0</span>.1.0a1
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pip<span class="w"> </span>install<span class="w"> </span>azure-functions-test<span class="o">==</span><span class="m">1</span>.17.0a1
 </code></pre></div></p>
 <p>Or install from source for development:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/sudzxd/azure-functions-test
@@ -1457,7 +1480,7 @@ SOFTWARE.</p>
 <hr />
 <h2 id="contact">Contact<a class="headerlink" href="#contact" title="Permanent link">&para;</a></h2>
 <p><strong>Author:</strong> Sudarshan
-<strong>Status:</strong> Alpha Release (v0.1.0a1) - <a href="https://pypi.org/project/azure-functions-test/">Available on PyPI</a></p>
+<strong>Status:</strong> Alpha Release (v1.17.0a1) - <a href="https://pypi.org/project/azure-functions-test/">Available on PyPI</a></p>
 <hr />
 <p><strong>⭐ Star this repo to follow progress!</strong></p>
 
