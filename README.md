@@ -4,6 +4,7 @@
 
 Fast, ergonomic, type-safe mock objects for testing Azure Functions. No runtime, no Azurite, no boilerplate.
 
+[![PyPI version](https://img.shields.io/pypi/v/azure-functions-test.svg)](https://pypi.org/project/azure-functions-test/)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Tests](https://img.shields.io/badge/tests-203%20passing-green.svg)](https://github.com/sudzxd/azure-functions-test)
 [![Coverage](https://img.shields.io/badge/coverage-75.94%25-brightgreen.svg)](https://github.com/sudzxd/azure-functions-test)
@@ -88,17 +89,23 @@ def test_process_order():
 
 ## Installation
 
-**Note:** Not yet published to PyPI. Install from source:
+Install from PyPI:
+
+```bash
+pip install azure-functions-test
+```
+
+For the latest alpha release:
+```bash
+pip install azure-functions-test==0.1.0a1
+```
+
+Or install from source for development:
 
 ```bash
 git clone https://github.com/sudzxd/azure-functions-test
 cd azure-functions-test
 uv sync --all-extras
-```
-
-**Coming soon:**
-```bash
-pip install azure-functions-test
 ```
 
 ---
@@ -484,7 +491,7 @@ SOFTWARE.
 ## Contact
 
 **Author:** Sudarshan
-**Status:** Active Development (Week 3)
+**Status:** Alpha Release (v0.1.0a1) - [Available on PyPI](https://pypi.org/project/azure-functions-test/)
 
 ---
 
