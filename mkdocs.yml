@@ -61,17 +61,16 @@ markdown_extensions:
   - toc:
       permalink: true
 
-docs_dir: .
 nav:
-  - Home: README.md
-  - Getting Started: docs/getting-started.md
+  - Home: index.md
+  - Getting Started: getting-started.md
   - API Reference:
-      - Overview: docs/api/index.md
-      - Mocks: docs/api/mocks.md
-      - Context: docs/api/context.md
-      - Protocols: docs/api/protocols.md
+      - Overview: api/index.md
+      - Mocks: api/mocks.md
+      - Context: api/context.md
+      - Protocols: api/protocols.md
   - Development:
-      - Style Guide: docs/development/style-guide.md
+      - Style Guide: development/style-guide.md
 
 extra:
   social:
