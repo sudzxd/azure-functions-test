@@ -202,6 +202,119 @@ def test_mock_http_request_empty_route_params() -> None:
 
 
 # =============================================================================
+# TESTS: Form Data
+# =============================================================================
+def test_mock_http_request_form_data_parsing() -> None:
+    """Form data should be parsed from application/x-www-form-urlencoded body."""
+    req = mock_http_request(
+        body=b"name=Alice&age=30",
+        method="POST",
+        headers={"Content-Type": "application/x-www-form-urlencoded"},
+    )
+
+    assert req.form["name"] == "Alice"
+    assert req.form["age"] == "30"
+
+
+def test_mock_http_request_form_data_with_special_characters() -> None:
+    """Form data with URL-encoded special characters should be decoded."""
+    req = mock_http_request(
+        body=b"message=Hello%20World%21&emoji=%F0%9F%8E%89",
+        method="POST",
+        headers={"Content-Type": "application/x-www-form-urlencoded"},
+    )
+
+    assert req.form["message"] == "Hello World!"
+    assert req.form["emoji"] == "🎉"
+
+
+def test_mock_http_request_form_data_multiple_fields() -> None:
+    """Form data with multiple fields should be parsed correctly."""
+    req = mock_http_request(
+        body=b"first_name=Alice&last_name=Smith&email=alice%40example.com&age=30",
+        method="POST",
+        headers={"Content-Type": "application/x-www-form-urlencoded"},
+    )
+
+    assert req.form["first_name"] == "Alice"
+    assert req.form["last_name"] == "Smith"
+    assert req.form["email"] == "alice@example.com"
+    assert req.form["age"] == "30"
+
+
+def test_mock_http_request_form_data_empty_values() -> None:
+    """Form data with empty values should be preserved."""
+    req = mock_http_request(
+        body=b"name=&description=",
+        method="POST",
+        headers={"Content-Type": "application/x-www-form-urlencoded"},
+    )
+
+    assert req.form["name"] == ""
+    assert req.form["description"] == ""
+
+
+def test_mock_http_request_form_data_duplicate_keys_uses_last() -> None:
+    """When form has duplicate keys, last value should be used."""
+    req = mock_http_request(
+        body=b"name=Alice&name=Bob&name=Charlie",
+        method="POST",
+        headers={"Content-Type": "application/x-www-form-urlencoded"},
+    )
+
+    assert req.form["name"] == "Charlie"
+
+
+def test_mock_http_request_form_data_without_content_type() -> None:
+    """Form property should return empty dict when Content-Type is not form."""
+    req = mock_http_request(
+        body=b"name=Alice&age=30",
+        method="POST",
+    )
+
+    assert req.form == {}
+
+
+def test_mock_http_request_form_data_with_json_content_type() -> None:
+    """Form property should return empty dict when Content-Type is JSON."""
+    req = mock_http_request(
+        body=b"name=Alice&age=30",
+        method="POST",
+        headers={"Content-Type": "application/json"},
+    )
+
+    assert req.form == {}
+
+
+def test_mock_http_request_form_data_empty_body() -> None:
+    """Form data with empty body should return empty dict."""
+    req = mock_http_request(
+        body=b"",
+        method="POST",
+        headers={"Content-Type": "application/x-www-form-urlencoded"},
+    )
+
+    assert req.form == {}
+
+
+def test_mock_http_request_form_data_caching() -> None:
+    """Form data should be cached after first access."""
+    req = mock_http_request(
+        body=b"name=Alice",
+        method="POST",
+        headers={"Content-Type": "application/x-www-form-urlencoded"},
+    )
+
+    # Access form twice
+    form1 = req.form
+    form2 = req.form
+
+    # Should return the same dict instance
+    assert form1 is form2
+    assert form1["name"] == "Alice"
+
+
+# =============================================================================
 # TESTS: Edge Cases
 # =============================================================================
 def test_mock_http_request_empty_dict_body() -> None:

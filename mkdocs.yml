@@ -1,0 +1,81 @@
+site_name: azure-functions-test
+site_description: Fast, ergonomic, type-safe mock objects for testing Azure Functions
+site_url: https://sudzxd.github.io/azure-functions-test/
+repo_url: https://github.com/sudzxd/azure-functions-test
+repo_name: sudzxd/azure-functions-test
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    # Light mode
+    - scheme: default
+      primary: blue
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - scheme: slate
+      primary: blue
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+            show_source: true
+            show_root_heading: true
+            show_root_full_path: false
+            merge_init_into_class: true
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+
+docs_dir: .
+nav:
+  - Home: README.md
+  - Getting Started: docs/getting-started.md
+  - API Reference:
+      - Overview: docs/api/index.md
+      - Mocks: docs/api/mocks.md
+      - Context: docs/api/context.md
+      - Protocols: docs/api/protocols.md
+  - Development:
+      - Style Guide: docs/development/style-guide.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/sudzxd/azure-functions-test
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/azure-functions-test/

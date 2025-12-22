@@ -10,6 +10,11 @@ from datetime import UTC, datetime
 
 # Project/Local
 from azure_functions_test import mock_event_grid_event
+from azure_functions_test.mocks.eventgrid import (
+    create_blob_created_event,
+    create_blob_deleted_event,
+    create_custom_event,
+)
 
 
 # =============================================================================
@@ -270,3 +275,174 @@ def test_mock_event_grid_event_with_all_parameters() -> None:
     assert event.event_type == "Custom.Resource.Updated"
     assert event.event_time == custom_time
     assert event.data_version == "2.0"
+
+
+# =============================================================================
+# TESTS: Factory Functions - Blob Events
+# =============================================================================
+def test_create_blob_created_event_basic() -> None:
+    """create_blob_created_event() should create BlobCreated event."""
+    blob_url = "https://test.blob.core.windows.net/container/file.txt"
+    event = create_blob_created_event(blob_url)
+
+    assert event.event_type == "Microsoft.Storage.BlobCreated"
+    assert event.get_json()["url"] == blob_url
+    assert event.get_json()["api"] == "PutBlob"
+    assert event.get_json()["blobType"] == "BlockBlob"
+
+
+def test_create_blob_created_event_extracts_blob_name_from_url() -> None:
+    """Blob name should be extracted from URL if not provided."""
+    blob_url = "https://test.blob.core.windows.net/container/my-file.txt"
+    event = create_blob_created_event(blob_url)
+
+    assert "my-file.txt" in event.subject
+
+
+def test_create_blob_created_event_with_custom_container() -> None:
+    """Custom container name should be used in subject."""
+    blob_url = "https://test.blob.core.windows.net/uploads/file.txt"
+    event = create_blob_created_event(blob_url, container_name="uploads")
+
+    assert "/containers/uploads/" in event.subject
+
+
+def test_create_blob_created_event_with_custom_blob_name() -> None:
+    """Custom blob name should override URL extraction."""
+    blob_url = "https://test.blob.core.windows.net/container/file.txt"
+    event = create_blob_created_event(blob_url, blob_name="custom-name.txt")
+
+    assert "/blobs/custom-name.txt" in event.subject
+
+
+def test_create_blob_created_event_with_storage_account() -> None:
+    """Storage account should be included in topic."""
+    blob_url = "https://myaccount.blob.core.windows.net/container/file.txt"
+    event = create_blob_created_event(blob_url, storage_account="myaccount")
+
+    assert "/storageAccounts/myaccount" in event.topic
+
+
+def test_create_blob_created_event_data_structure() -> None:
+    """BlobCreated event should have required data fields."""
+    blob_url = "https://test.blob.core.windows.net/container/file.txt"
+    event = create_blob_created_event(blob_url)
+
+    data = event.get_json()
+    assert "api" in data
+    assert "clientRequestId" in data
+    assert "requestId" in data
+    assert "eTag" in data
+    assert "contentType" in data
+    assert "contentLength" in data
+    assert "blobType" in data
+    assert "url" in data
+    assert "sequencer" in data
+
+
+def test_create_blob_deleted_event_basic() -> None:
+    """create_blob_deleted_event() should create BlobDeleted event."""
+    blob_url = "https://test.blob.core.windows.net/container/old-file.txt"
+    event = create_blob_deleted_event(blob_url)
+
+    assert event.event_type == "Microsoft.Storage.BlobDeleted"
+    assert event.get_json()["url"] == blob_url
+    assert event.get_json()["api"] == "DeleteBlob"
+    assert event.get_json()["blobType"] == "BlockBlob"
+
+
+def test_create_blob_deleted_event_extracts_blob_name_from_url() -> None:
+    """Blob name should be extracted from URL if not provided."""
+    blob_url = "https://test.blob.core.windows.net/container/deleted-file.txt"
+    event = create_blob_deleted_event(blob_url)
+
+    assert "deleted-file.txt" in event.subject
+
+
+def test_create_blob_deleted_event_with_custom_container() -> None:
+    """Custom container name should be used in subject."""
+    blob_url = "https://test.blob.core.windows.net/archive/file.txt"
+    event = create_blob_deleted_event(blob_url, container_name="archive")
+
+    assert "/containers/archive/" in event.subject
+
+
+def test_create_blob_deleted_event_data_structure() -> None:
+    """BlobDeleted event should have required data fields."""
+    blob_url = "https://test.blob.core.windows.net/container/file.txt"
+    event = create_blob_deleted_event(blob_url)
+
+    data = event.get_json()
+    assert "api" in data
+    assert "clientRequestId" in data
+    assert "requestId" in data
+    assert "contentType" in data
+    assert "blobType" in data
+    assert "url" in data
+    assert "sequencer" in data
+
+
+# =============================================================================
+# TESTS: Factory Functions - Custom Events
+# =============================================================================
+def test_create_custom_event_basic() -> None:
+    """create_custom_event() should create custom event."""
+    data = {"userId": 123, "action": "login"}
+    event = create_custom_event(data, event_type="MyApp.User.Login")
+
+    assert event.event_type == "MyApp.User.Login"
+    assert event.get_json() == {"userId": 123, "action": "login"}
+
+
+def test_create_custom_event_default_event_type() -> None:
+    """Custom event should use default event type if not provided."""
+    data = {"key": "value"}
+    event = create_custom_event(data)
+
+    assert event.event_type == "Custom.Application.Event"
+
+
+def test_create_custom_event_with_custom_subject() -> None:
+    """Custom subject should be used."""
+    data = {"orderId": 456}
+    event = create_custom_event(data, subject="orders/456/completed")
+
+    assert event.subject == "orders/456/completed"
+
+
+def test_create_custom_event_default_subject() -> None:
+    """Custom event should use default subject if not provided."""
+    data = {"test": "data"}
+    event = create_custom_event(data)
+
+    assert event.subject == "custom/event"
+
+
+def test_create_custom_event_with_additional_properties() -> None:
+    """Custom event should support additional event properties."""
+    data = {"message": "test"}
+    event = create_custom_event(
+        data,
+        event_type="MyApp.Test.Event",
+        data_version="2.0",
+        id="custom-event-123",
+    )
+
+    assert event.event_type == "MyApp.Test.Event"
+    assert event.data_version == "2.0"
+    assert event.id == "custom-event-123"
+
+
+def test_create_custom_event_complex_data() -> None:
+    """Custom event should handle complex data structures."""
+    data = {
+        "user": {"id": 123, "name": "Alice"},
+        "items": [{"id": 1, "qty": 2}, {"id": 2, "qty": 1}],
+        "total": 150.50,
+    }
+    event = create_custom_event(data, event_type="MyApp.Order.Created")
+
+    event_data = event.get_json()
+    assert event_data["user"]["id"] == 123
+    assert len(event_data["items"]) == 2
+    assert event_data["total"] == 150.50

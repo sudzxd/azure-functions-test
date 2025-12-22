@@ -105,6 +105,9 @@ def params(self) -> Mapping[str, str]: ...
 
 @property
 def route_params(self) -> Mapping[str, str]: ...
+
+@property
+def form(self) -> dict[str, str]: ...
 ```
 
 ### Methods
@@ -143,6 +146,12 @@ Structural type for Azure Timer trigger requests.
 ```python
 @property
 def past_due(self) -> bool: ...
+
+@property
+def schedule_status(self) -> dict[str, Any]: ...
+
+@property
+def schedule(self) -> dict[str, Any]: ...
 ```
 
 ### Example

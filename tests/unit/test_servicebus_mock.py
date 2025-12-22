@@ -414,3 +414,305 @@ def test_mock_service_bus_message_with_all_parameters() -> None:
     assert msg.dead_letter_error_description == "Failed to process"
     assert msg.application_properties["priority"] == "high"
     assert msg.user_properties["source"] == "api"
+
+
+# =============================================================================
+# TESTS: Message Locking
+# =============================================================================
+def test_mock_service_bus_message_with_lock_token() -> None:
+    """Lock token should be set correctly."""
+    msg = mock_service_bus_message("test", lock_token="lock-abc-123")
+
+    assert msg.lock_token == "lock-abc-123"
+
+
+def test_mock_service_bus_message_with_locked_until() -> None:
+    """Locked until timestamp should be set correctly."""
+    from datetime import timedelta
+
+    locked_time = datetime.now(UTC) + timedelta(minutes=5)
+    msg = mock_service_bus_message("test", locked_until=locked_time)
+
+    assert msg.locked_until == locked_time
+
+
+def test_mock_service_bus_message_lock_token_defaults_to_none() -> None:
+    """Lock token should default to None."""
+    msg = mock_service_bus_message("test")
+
+    assert msg.lock_token is None
+
+
+def test_mock_service_bus_message_locked_until_defaults_to_none() -> None:
+    """Locked until should default to None."""
+    msg = mock_service_bus_message("test")
+
+    assert msg.locked_until is None
+
+
+# =============================================================================
+# TESTS: Message Sequencing
+# =============================================================================
+def test_mock_service_bus_message_with_sequence_number() -> None:
+    """Sequence number should be set correctly."""
+    msg = mock_service_bus_message("test", sequence_number=12345)
+
+    assert msg.sequence_number == 12345
+
+
+def test_mock_service_bus_message_with_enqueued_sequence_number() -> None:
+    """Enqueued sequence number should be set correctly."""
+    msg = mock_service_bus_message("test", enqueued_sequence_number=12300)
+
+    assert msg.enqueued_sequence_number == 12300
+
+
+def test_mock_service_bus_message_sequence_numbers_default_to_none() -> None:
+    """Sequence numbers should default to None."""
+    msg = mock_service_bus_message("test")
+
+    assert msg.sequence_number is None
+    assert msg.enqueued_sequence_number is None
+
+
+def test_mock_service_bus_message_sequence_ordering() -> None:
+    """Messages can be ordered by sequence number."""
+    msg1 = mock_service_bus_message("first", sequence_number=100)
+    msg2 = mock_service_bus_message("second", sequence_number=101)
+    msg3 = mock_service_bus_message("third", sequence_number=102)
+
+    messages = [msg2, msg3, msg1]
+    sorted_messages = sorted(messages, key=lambda m: m.sequence_number or 0)
+
+    assert sorted_messages[0].sequence_number == 100
+    assert sorted_messages[1].sequence_number == 101
+    assert sorted_messages[2].sequence_number == 102
+
+
+# =============================================================================
+# TESTS: Scheduled Messages
+# =============================================================================
+def test_mock_service_bus_message_with_scheduled_enqueue_time() -> None:
+    """Scheduled enqueue time should be set correctly."""
+    from datetime import timedelta
+
+    scheduled_time = datetime.now(UTC) + timedelta(hours=1)
+    msg = mock_service_bus_message("test", scheduled_enqueue_time=scheduled_time)
+
+    assert msg.scheduled_enqueue_time == scheduled_time
+
+
+def test_mock_service_bus_message_with_scheduled_enqueue_time_utc() -> None:
+    """Scheduled enqueue time UTC should be set correctly."""
+    from datetime import timedelta
+
+    scheduled_time = datetime.now(UTC) + timedelta(hours=2)
+    msg = mock_service_bus_message("test", scheduled_enqueue_time_utc=scheduled_time)
+
+    assert msg.scheduled_enqueue_time_utc == scheduled_time
+
+
+def test_mock_service_bus_message_scheduled_times_default_to_none() -> None:
+    """Scheduled times should default to None."""
+    msg = mock_service_bus_message("test")
+
+    assert msg.scheduled_enqueue_time is None
+    assert msg.scheduled_enqueue_time_utc is None
+
+
+# =============================================================================
+# TESTS: Routing and Reply Patterns
+# =============================================================================
+def test_mock_service_bus_message_with_label() -> None:
+    """Label should be set correctly."""
+    msg = mock_service_bus_message("test", label="order-processing")
+
+    assert msg.label == "order-processing"
+
+
+def test_mock_service_bus_message_with_subject() -> None:
+    """Subject should be set correctly."""
+    msg = mock_service_bus_message("test", subject="orders/new")
+
+    assert msg.subject == "orders/new"
+
+
+def test_mock_service_bus_message_with_reply_to() -> None:
+    """Reply-to address should be set correctly."""
+    msg = mock_service_bus_message("test", reply_to="response-queue")
+
+    assert msg.reply_to == "response-queue"
+
+
+def test_mock_service_bus_message_with_reply_to_session_id() -> None:
+    """Reply-to session ID should be set correctly."""
+    msg = mock_service_bus_message("test", reply_to_session_id="reply-session-123")
+
+    assert msg.reply_to_session_id == "reply-session-123"
+
+
+def test_mock_service_bus_message_with_to() -> None:
+    """To address should be set correctly."""
+    msg = mock_service_bus_message("test", to="destination-queue")
+
+    assert msg.to == "destination-queue"
+
+
+def test_mock_service_bus_message_routing_properties_default_to_none() -> None:
+    """Routing properties should default to None."""
+    msg = mock_service_bus_message("test")
+
+    assert msg.label is None
+    assert msg.subject is None
+    assert msg.reply_to is None
+    assert msg.reply_to_session_id is None
+    assert msg.to is None
+
+
+def test_mock_service_bus_message_request_reply_pattern() -> None:
+    """Request-reply pattern should work correctly."""
+    request = mock_service_bus_message(
+        {"action": "get_user", "user_id": 123},
+        correlation_id="req-456",
+        reply_to="response-queue",
+    )
+
+    assert request.correlation_id == "req-456"
+    assert request.reply_to == "response-queue"
+
+
+# =============================================================================
+# TESTS: Message Lifecycle
+# =============================================================================
+def test_mock_service_bus_message_with_time_to_live() -> None:
+    """Time to live should be set correctly."""
+    from datetime import timedelta
+
+    ttl = timedelta(hours=24)
+    msg = mock_service_bus_message("test", time_to_live=ttl)
+
+    assert msg.time_to_live == ttl
+
+
+def test_mock_service_bus_message_with_expiration_time() -> None:
+    """Expiration time (legacy) should be set correctly."""
+    from datetime import timedelta
+
+    expiration = datetime.now(UTC) + timedelta(hours=1)
+    msg = mock_service_bus_message("test", expiration_time=expiration)
+
+    assert msg.expiration_time == expiration
+
+
+def test_mock_service_bus_message_with_state() -> None:
+    """State should be set correctly."""
+    msg = mock_service_bus_message("test", state=1)
+
+    assert msg.state == 1
+
+
+def test_mock_service_bus_message_lifecycle_properties_default_to_none() -> None:
+    """Lifecycle properties should default to None."""
+    msg = mock_service_bus_message("test")
+
+    assert msg.time_to_live is None
+    assert msg.expiration_time is None
+    assert msg.state is None
+
+
+# =============================================================================
+# TESTS: Advanced Features
+# =============================================================================
+def test_mock_service_bus_message_with_transaction_partition_key() -> None:
+    """Transaction partition key should be set correctly."""
+    msg = mock_service_bus_message("test", transaction_partition_key="txn-partition-1")
+
+    assert msg.transaction_partition_key == "txn-partition-1"
+
+
+def test_mock_service_bus_message_with_metadata() -> None:
+    """Metadata should be set correctly."""
+    metadata = {"created_by": "system", "version": "2.0"}
+    msg = mock_service_bus_message("test", metadata=metadata)
+
+    assert msg.metadata == metadata
+    assert msg.metadata is not None
+    assert msg.metadata["created_by"] == "system"
+    assert msg.metadata["version"] == "2.0"
+
+
+def test_mock_service_bus_message_advanced_properties_default_to_none() -> None:
+    """Advanced properties should default to None."""
+    msg = mock_service_bus_message("test")
+
+    assert msg.transaction_partition_key is None
+    assert msg.metadata is None
+
+
+# =============================================================================
+# TESTS: Complete Message with All Properties
+# =============================================================================
+def test_mock_service_bus_message_with_all_new_properties() -> None:
+    """All new properties should work together."""
+    from datetime import timedelta
+
+    locked_time = datetime(2025, 1, 1, 12, 0, 0, tzinfo=UTC)
+    scheduled_time = datetime(2025, 1, 2, 12, 0, 0, tzinfo=UTC)
+    expiration = datetime(2025, 1, 3, 12, 0, 0, tzinfo=UTC)
+    ttl = timedelta(hours=48)
+
+    msg = mock_service_bus_message(
+        {"comprehensive": "test"},
+        # Locking
+        lock_token="lock-xyz-789",
+        locked_until=locked_time,
+        # Sequencing
+        sequence_number=54321,
+        enqueued_sequence_number=54300,
+        # Scheduling
+        scheduled_enqueue_time=scheduled_time,
+        scheduled_enqueue_time_utc=scheduled_time,
+        # Routing/Reply
+        label="comprehensive-test",
+        subject="tests/comprehensive",
+        reply_to="test-response-queue",
+        reply_to_session_id="reply-session-456",
+        to="destination-test-queue",
+        # Lifecycle
+        time_to_live=ttl,
+        expiration_time=expiration,
+        state=2,
+        # Advanced
+        transaction_partition_key="txn-test-key",
+        metadata={"test_type": "comprehensive", "priority": "high"},
+    )
+
+    # Verify locking
+    assert msg.lock_token == "lock-xyz-789"
+    assert msg.locked_until == locked_time
+
+    # Verify sequencing
+    assert msg.sequence_number == 54321
+    assert msg.enqueued_sequence_number == 54300
+
+    # Verify scheduling
+    assert msg.scheduled_enqueue_time == scheduled_time
+    assert msg.scheduled_enqueue_time_utc == scheduled_time
+
+    # Verify routing/reply
+    assert msg.label == "comprehensive-test"
+    assert msg.subject == "tests/comprehensive"
+    assert msg.reply_to == "test-response-queue"
+    assert msg.reply_to_session_id == "reply-session-456"
+    assert msg.to == "destination-test-queue"
+
+    # Verify lifecycle
+    assert msg.time_to_live == ttl
+    assert msg.expiration_time == expiration
+    assert msg.state == 2
+
+    # Verify advanced
+    assert msg.transaction_partition_key == "txn-test-key"
+    assert msg.metadata is not None
+    assert msg.metadata["test_type"] == "comprehensive"
+    assert msg.metadata["priority"] == "high"
