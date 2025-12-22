@@ -15,6 +15,9 @@ permissions:
   contents: write
   id-token: write
 
+env:
+  UV_PYTHON_PREFERENCE: system
+
 jobs:
   validate:
     name: Validate Release
@@ -66,18 +69,18 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
-        run: uv sync --all-extras
+        run: uv sync --all-extras --python ${{ matrix.python-version }}
 
       - name: Run linting
         run: |
-          uv run ruff format --check .
-          uv run ruff check .
+          uv run --python ${{ matrix.python-version }} ruff format --check .
+          uv run --python ${{ matrix.python-version }} ruff check .
 
       - name: Run type checking
-        run: PYTHONPATH=src uv run pyright
+        run: PYTHONPATH=src uv run --python ${{ matrix.python-version }} pyright
 
       - name: Run tests
-        run: PYTHONPATH=src uv run pytest
+        run: PYTHONPATH=src uv run --python ${{ matrix.python-version }} pytest
 
   build:
     name: Build Package
@@ -112,7 +115,7 @@ jobs:
 
       - name: Check package contents
         run: |
-          uv run twine check dist/*
+          uv run --python 3.11 twine check dist/*
           tar -tzf dist/*.tar.gz | head -20
 
       - name: Upload build artifacts

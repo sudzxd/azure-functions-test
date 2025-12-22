@@ -16,6 +16,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  UV_PYTHON_PREFERENCE: system
+
 jobs:
   # ============================================================================
   # Job 1: Lint - Code Style and Formatting
@@ -40,10 +43,10 @@ jobs:
         run: uv sync --all-extras
 
       - name: Run Ruff format check
-        run: uv run ruff format --check .
+        run: uv run --python 3.11 ruff format --check .
 
       - name: Run Ruff lint
-        run: uv run ruff check .
+        run: uv run --python 3.11 ruff check .
 
   # ============================================================================
   # Job 2: Type Check - Static Type Analysis
@@ -68,7 +71,7 @@ jobs:
         run: uv sync --all-extras
 
       - name: Run Pyright
-        run: PYTHONPATH=src uv run pyright
+        run: PYTHONPATH=src uv run --python 3.11 pyright
 
   # ============================================================================
   # Job 3: Test - Unit Tests Across Python Versions
@@ -94,10 +97,10 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
-        run: uv sync --all-extras
+        run: uv sync --all-extras --python ${{ matrix.python-version }}
 
       - name: Run tests with coverage
-        run: PYTHONPATH=src uv run pytest --cov --cov-report=xml --cov-report=term
+        run: PYTHONPATH=src uv run --python ${{ matrix.python-version }} pytest --cov --cov-report=xml --cov-report=term
 
       - name: Upload coverage to Codecov
         if: |
@@ -133,10 +136,10 @@ jobs:
         run: uv sync --all-extras
 
       - name: Run Bandit security scan
-        run: uv run bandit -r src/
+        run: uv run --python 3.11 bandit -r src/
 
       - name: Run pip-audit
-        run: uv run pip-audit
+        run: uv run --python 3.11 pip-audit
 
   # ============================================================================
   # Job 5: Build - Verify Package Build
@@ -167,7 +170,7 @@ jobs:
 
       - name: Verify package
         run: |
-          uv run twine check dist/*
+          uv run --python 3.11 twine check dist/*
           echo "Package built successfully"
           ls -lh dist/
 
