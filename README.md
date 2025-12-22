@@ -15,6 +15,21 @@ Fast, ergonomic, type-safe mock objects for testing Azure Functions. No runtime,
 
 ---
 
+## Versioning Strategy
+
+This package follows **version-compatible versioning** with the `azure-functions` library:
+
+- `1.17.0a1` = Alpha release compatible with `azure-functions>=1.17.0`
+- `1.17.0` = Stable release for `azure-functions 1.17.x`
+- `1.18.0` = When we add support for `azure-functions 1.18.x`
+
+**Current compatibility:**
+- Azure Functions: `>=1.17.0`
+- Python: `3.11+`
+- Pydantic: `>=2.0`
+
+---
+
 ## Quick Example
 
 ```python
@@ -97,7 +112,7 @@ pip install azure-functions-test
 
 For the latest alpha release:
 ```bash
-pip install azure-functions-test==0.1.0a1
+pip install azure-functions-test==1.17.0a1
 ```
 
 Or install from source for development:
@@ -491,7 +506,7 @@ SOFTWARE.
 ## Contact
 
 **Author:** Sudarshan
-**Status:** Alpha Release (v0.1.0a1) - [Available on PyPI](https://pypi.org/project/azure-functions-test/)
+**Status:** Alpha Release (v1.17.0a1) - [Available on PyPI](https://pypi.org/project/azure-functions-test/)
 
 ---
 
