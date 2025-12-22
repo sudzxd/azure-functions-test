@@ -232,7 +232,7 @@ The PR template will guide you, but include:
 
 - **To `develop`**: Use squash or merge commits (your choice)
 - **To `main`**: **Only merge commits** (preserves history)
-- Maintainers will handle merges to `main` via merge candidate PRs
+- Maintainers will handle merges to `main` via release branches (see Release Process below)
 
 ## Code Quality Standards
 
@@ -344,13 +344,45 @@ def mock_cosmos_db_trigger(
 
 Maintainers handle releases, but here's the process:
 
-1. Merge `develop` to `main` via merge candidate PR
-2. Create version tag: `v1.17.0` (matches azure-functions version)
-3. GitHub Actions automatically:
-   - Runs full test suite
-   - Builds package
-   - Publishes to PyPI
-   - Creates GitHub release with changelog
+1. **Create Release Branch**: Branch from `develop` with name `release/vX.Y.Z`
+   ```bash
+   git checkout develop
+   git pull origin develop
+   git checkout -b release/v1.17.0
+   ```
+
+2. **Rebase Main**: Rebase `main` onto the release branch
+   ```bash
+   git fetch origin main
+   git rebase origin/main
+   ```
+
+3. **Push and Verify**: Push release branch and let CI build and verify
+   ```bash
+   git push origin release/v1.17.0
+   ```
+   - All tests must pass
+   - All quality checks must pass
+   - Build verification succeeds
+
+4. **Merge to Main**: Create PR from release branch to `main` (merge commit only)
+   - Review final changes
+   - Ensure CI is green
+   - Merge using merge commit (not squash)
+
+5. **Tag Release**: Create version tag on `main`
+   ```bash
+   git checkout main
+   git pull origin main
+   git tag -a v1.17.0 -m "Release v1.17.0"
+   git push origin v1.17.0
+   ```
+
+6. **Automatic Publishing**: GitHub Actions will automatically:
+   - Run full test suite
+   - Build package
+   - Publish to PyPI
+   - Create GitHub release with changelog
 
 ## Questions?
 
