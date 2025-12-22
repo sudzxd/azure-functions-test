@@ -399,18 +399,18 @@ See inline docstrings for full parameter documentation.
 
 ## Documentation
 
-- **[API Reference](./docs/api/)** - Complete API documentation
-  - [Mocks API](./docs/api/mocks.md) - All 6 mock functions
-  - [Context API](./docs/api/context.md) - Output binding capture
-  - [Protocols](./docs/api/protocols.md) - Type definitions
+- **[API Reference](./api/)** - Complete API documentation
+  - [Mocks API](./api/mocks.md) - All 6 mock functions
+  - [Context API](./api/context.md) - Output binding capture
+  - [Protocols](./api/protocols.md) - Type definitions
 - **[Examples](./examples/basic/)** - Working code examples for all triggers
-- **[Style Guide](./docs/development/style-guide.md)** - Coding standards for contributors
+- **[Style Guide](./development/style-guide.md)** - Coding standards for contributors
 
 ---
 
 ## Contributing
 
-Contributions welcome! See [style-guide.md](./docs/development/style-guide.md) for coding standards.
+Contributions welcome! See [style-guide.md](./development/style-guide.md) for coding standards.
 
 **Development Setup:**
 
