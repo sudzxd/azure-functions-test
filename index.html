@@ -413,32 +413,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#versioning-strategy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Versioning Strategy
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#quick-example" class="md-nav__link">
     <span class="md-ellipsis">
       
         Quick Example
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#why-this-library" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Why This Library?
       
     </span>
   </a>
@@ -461,6 +439,28 @@
     <span class="md-ellipsis">
       
         Installation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#versioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Versioning
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Library?
       
     </span>
   </a>
@@ -573,28 +573,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#status" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Status
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#roadmap" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Roadmap
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#api-reference" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -645,17 +623,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#documentation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Documentation
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#contributing" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -667,21 +634,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tech-stack" class="md-nav__link">
+  <a href="#status" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Tech Stack
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Requirements
+        Status
       
     </span>
   </a>
@@ -700,10 +656,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#contact" class="md-nav__link">
+  <a href="#links" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Contact
+        Links
       
     </span>
   </a>
@@ -1027,8 +983,6 @@
 <blockquote>
 <p><strong>Unit test Azure Functions without the runtime.</strong></p>
 </blockquote>
-<!-- Updated: 2025-12-22 -->
-
 <p>Fast, ergonomic, type-safe mock objects for testing Azure Functions. No runtime, no Azurite, no boilerplate.</p>
 <p><a href="https://pypi.org/project/azure-functions-test/"><img alt="PyPI version" src="https://img.shields.io/pypi/v/azure-functions-test.svg" /></a>
 <a href="https://www.python.org/downloads/"><img alt="Python 3.11+" src="https://img.shields.io/badge/python-3.11+-blue.svg" /></a>
@@ -1036,19 +990,6 @@
 <a href="https://github.com/sudzxd/azure-functions-test"><img alt="Coverage" src="https://img.shields.io/badge/coverage-75.94%25-brightgreen.svg" /></a>
 <a href="https://github.com/astral-sh/ruff"><img alt="Code Style: Ruff" src="https://img.shields.io/badge/code%20style-ruff-black.svg" /></a>
 <a href="https://github.com/microsoft/pyright"><img alt="Type Checked: Pyright" src="https://img.shields.io/badge/type%20checked-pyright-blue.svg" /></a></p>
-<p><strong>Requires Python 3.11+</strong> for optimal performance and modern syntax support.</p>
-<hr />
-<h2 id="versioning-strategy">Versioning Strategy<a class="headerlink" href="#versioning-strategy" title="Permanent link">&para;</a></h2>
-<p>This package follows <strong>version-compatible versioning</strong> with the <code>azure-functions</code> library:</p>
-<ul>
-<li><code>1.17.0a1</code> = Alpha release compatible with <code>azure-functions&gt;=1.17.0</code></li>
-<li><code>1.17.0</code> = Stable release for <code>azure-functions 1.17.x</code></li>
-<li><code>1.18.0</code> = When we add support for <code>azure-functions 1.18.x</code></li>
-</ul>
-<p><strong>Current compatibility:</strong>
-- Azure Functions: <code>&gt;=1.17.0</code>
-- Python: <code>3.11+</code>
-- Pydantic: <code>&gt;=2.0</code></p>
 <hr />
 <h2 id="quick-example">Quick Example<a class="headerlink" href="#quick-example" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">azure_functions_test</span><span class="w"> </span><span class="kn">import</span> <span class="n">mock_queue_message</span><span class="p">,</span> <span class="n">FunctionTestContext</span>
@@ -1065,6 +1006,34 @@
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">][</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;completed&quot;</span>
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">][</span><span class="s2">&quot;order_id&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">123</span>
 </code></pre></div>
+<hr />
+<h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>6 Trigger Types Supported</strong>: Queue Storage, HTTP, Timer, Blob Storage, Service Bus, Event Grid</li>
+<li><strong>Zero Runtime Dependency</strong>: Pure Python mocks using Pydantic - no <code>func start</code>, Azurite, or Docker needed</li>
+<li><strong>Type-Safe</strong>: Full Pyright strict mode coverage (0 errors) with auto-complete support</li>
+<li><strong>SDK-Compatible</strong>: Drop-in replacements for <code>azure-functions</code> types with all methods and properties</li>
+<li><strong>Minimal Ceremony</strong>: Simple factory functions with smart defaults - only specify data you care about</li>
+<li><strong>Output Capture</strong>: Explicit output binding capture with <code>FunctionTestContext</code> for type-safe assertions</li>
+<li><strong>Fast</strong>: Tests run in milliseconds, not seconds</li>
+</ul>
+<hr />
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>azure-functions-test
+</code></pre></div>
+<p>For development:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/sudzxd/azure-functions-test
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">cd</span><span class="w"> </span>azure-functions-test
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>uv<span class="w"> </span>sync<span class="w"> </span>--all-extras
+</code></pre></div>
+<hr />
+<h2 id="versioning">Versioning<a class="headerlink" href="#versioning" title="Permanent link">&para;</a></h2>
+<p>This package follows <strong>version-compatible versioning</strong> with the <code>azure-functions</code> library.</p>
+<p>See <a href="https://github.com/sudzxd/azure-functions-test/blob/main/CHANGELOG.md">CHANGELOG</a> for version history and compatibility details.</p>
+<p><strong>Requirements:</strong>
+- Python: <code>3.11+</code>
+- Azure Functions: <code>&gt;=1.17.0</code>
+- Pydantic: <code>&gt;=2.0</code></p>
 <hr />
 <h2 id="why-this-library">Why This Library?<a class="headerlink" href="#why-this-library" title="Permanent link">&para;</a></h2>
 <table>
@@ -1089,272 +1058,198 @@
 </tr>
 <tr>
 <td><strong>No testing</strong></td>
-<td>Bugs in production 🙃</td>
+<td>Bugs in production</td>
 </tr>
 </tbody>
 </table>
-<p><strong>This library fills the gap:</strong> Ergonomic mocks, output capture, zero runtime dependency.</p>
-<hr />
-<h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
-<p>✅ <strong>6 Trigger Types Supported</strong>
-- Queue Storage
-- HTTP (with form data, JSON, body type auto-detection)
-- Timer (with schedule and past-due tracking)
-- Blob Storage (with metadata and properties)
-- Service Bus (with sessions, dead-letter, correlation)
-- Event Grid (with custom and Azure system events)</p>
-<p>✅ <strong>Zero Runtime Dependency</strong>
-- Pure Python mocks using Pydantic dataclasses
-- No <code>func start</code> required
-- No Azurite or Docker needed
-- Tests run in milliseconds, not seconds</p>
-<p>✅ <strong>Type-Safe</strong>
-- Full Pyright strict mode coverage (0 errors)
-- Structural typing with Protocol types
-- Auto-complete in VS Code
-- Catch errors at test time, not runtime</p>
-<p>✅ <strong>SDK-Compatible</strong>
-- Drop-in replacements for <code>azure-functions</code> types
-- All methods and properties work (<code>get_body()</code>, <code>get_json()</code>, etc.)
-- Implements Azure SDK protocols for maximum compatibility</p>
-<p>✅ <strong>Minimal Ceremony</strong>
-- Simple factory functions with smart defaults
-- Only specify data you care about
-- Lazy initialization for performance</p>
-<p>✅ <strong>Output Capture</strong>
-- Explicit output binding capture with <code>ctx.out("binding_name")</code>
-- Type-safe assertions with <code>ctx.outputs</code>
-- No magic, full control</p>
-<hr />
-<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
-<p>Install from PyPI:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>azure-functions-test
-</code></pre></div>
-<p>For the latest alpha release:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pip<span class="w"> </span>install<span class="w"> </span>azure-functions-test<span class="o">==</span><span class="m">1</span>.17.0a1
-</code></pre></div></p>
-<p>Or install from source for development:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/sudzxd/azure-functions-test
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">cd</span><span class="w"> </span>azure-functions-test
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>uv<span class="w"> </span>sync<span class="w"> </span>--all-extras
-</code></pre></div>
+<p><strong>This library fills the gap:</strong> Fast, ergonomic mocks with output capture and zero runtime dependency.</p>
 <hr />
 <h2 id="supported-triggers">Supported Triggers<a class="headerlink" href="#supported-triggers" title="Permanent link">&para;</a></h2>
 <h3 id="queue-storage">Queue Storage<a class="headerlink" href="#queue-storage" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">azure_functions_test</span><span class="w"> </span><span class="kn">import</span> <span class="n">mock_queue_message</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># Simple message</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">msg</span> <span class="o">=</span> <span class="n">mock_queue_message</span><span class="p">({</span><span class="s2">&quot;order_id&quot;</span><span class="p">:</span> <span class="mi">123</span><span class="p">})</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="k">assert</span> <span class="n">msg</span><span class="o">.</span><span class="n">get_json</span><span class="p">()[</span><span class="s2">&quot;order_id&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">123</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1"># With metadata</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="n">msg</span> <span class="o">=</span> <span class="n">mock_queue_message</span><span class="p">(</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="sa">b</span><span class="s2">&quot;raw data&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;msg-456&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    <span class="n">dequeue_count</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="n">insertion_time</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">UTC</span><span class="p">)</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">azure_functions_test</span><span class="w"> </span><span class="kn">import</span> <span class="n">mock_queue_message</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># Simple message</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">msg</span> <span class="o">=</span> <span class="n">mock_queue_message</span><span class="p">({</span><span class="s2">&quot;order_id&quot;</span><span class="p">:</span> <span class="mi">123</span><span class="p">})</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">assert</span> <span class="n">msg</span><span class="o">.</span><span class="n">get_json</span><span class="p">()[</span><span class="s2">&quot;order_id&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">123</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># With metadata</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="n">msg</span> <span class="o">=</span> <span class="n">mock_queue_message</span><span class="p">(</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="sa">b</span><span class="s2">&quot;raw data&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;msg-456&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="n">dequeue_count</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="n">insertion_time</span><span class="o">=</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">UTC</span><span class="p">)</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="p">)</span>
 </code></pre></div>
 <h3 id="http-request">HTTP Request<a class="headerlink" href="#http-request" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">azure_functions_test</span><span class="w"> </span><span class="kn">import</span> <span class="n">mock_http_request</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># JSON request</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">req</span> <span class="o">=</span> <span class="n">mock_http_request</span><span class="p">(</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="n">method</span><span class="o">=</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="n">body</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">},</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">}</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="p">)</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="c1"># Form data (auto-parsed)</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="n">req</span> <span class="o">=</span> <span class="n">mock_http_request</span><span class="p">(</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>    <span class="n">method</span><span class="o">=</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>    <span class="n">body</span><span class="o">=</span><span class="s2">&quot;name=Alice&amp;age=30&quot;</span><span class="p">,</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/x-www-form-urlencoded&quot;</span><span class="p">}</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="p">)</span>
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="k">assert</span> <span class="n">req</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Alice&quot;</span>
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>
-<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="c1"># With route params</span>
-<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="n">req</span> <span class="o">=</span> <span class="n">mock_http_request</span><span class="p">(</span>
-<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;/api/users/123&quot;</span><span class="p">,</span>
-<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>    <span class="n">route_params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">}</span>
-<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">azure_functions_test</span><span class="w"> </span><span class="kn">import</span> <span class="n">mock_http_request</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># JSON request</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">req</span> <span class="o">=</span> <span class="n">mock_http_request</span><span class="p">(</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="n">method</span><span class="o">=</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="n">body</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">},</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">}</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">)</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="c1"># Form data (auto-parsed)</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="n">req</span> <span class="o">=</span> <span class="n">mock_http_request</span><span class="p">(</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="n">method</span><span class="o">=</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    <span class="n">body</span><span class="o">=</span><span class="s2">&quot;name=Alice&amp;age=30&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/x-www-form-urlencoded&quot;</span><span class="p">}</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="p">)</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="k">assert</span> <span class="n">req</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Alice&quot;</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="c1"># With route params</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="n">req</span> <span class="o">=</span> <span class="n">mock_http_request</span><span class="p">(</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;/api/users/123&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>    <span class="n">route_params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">}</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="p">)</span>
 </code></pre></div>
 <h3 id="timer-trigger">Timer Trigger<a class="headerlink" href="#timer-trigger" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">azure_functions_test</span><span class="w"> </span><span class="kn">import</span> <span class="n">mock_timer_request</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">UTC</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># Simple timer</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">timer</span> <span class="o">=</span> <span class="n">mock_timer_request</span><span class="p">()</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1"># With schedule and past-due tracking</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="n">timer</span> <span class="o">=</span> <span class="n">mock_timer_request</span><span class="p">(</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="n">schedule</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;AdjustForDST&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>    <span class="n">schedule_status</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Last&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">UTC</span><span class="p">)},</span>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>    <span class="n">past_due</span><span class="o">=</span><span class="kc">True</span>
-<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">azure_functions_test</span><span class="w"> </span><span class="kn">import</span> <span class="n">mock_timer_request</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">UTC</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Simple timer</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">timer</span> <span class="o">=</span> <span class="n">mock_timer_request</span><span class="p">()</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># With schedule and past-due tracking</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">timer</span> <span class="o">=</span> <span class="n">mock_timer_request</span><span class="p">(</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="n">schedule</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;AdjustForDST&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="n">schedule_status</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Last&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">UTC</span><span class="p">)},</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    <span class="n">past_due</span><span class="o">=</span><span class="kc">True</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="p">)</span>
 </code></pre></div>
 <h3 id="blob-storage">Blob Storage<a class="headerlink" href="#blob-storage" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">azure_functions_test</span><span class="w"> </span><span class="kn">import</span> <span class="n">mock_blob</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="c1"># Simple blob</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">blob</span> <span class="o">=</span> <span class="n">mock_blob</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;file contents&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;data.txt&quot;</span><span class="p">)</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="k">assert</span> <span class="n">blob</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> <span class="o">==</span> <span class="sa">b</span><span class="s2">&quot;file contents&quot;</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1"># With metadata and properties</span>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="n">blob</span> <span class="o">=</span> <span class="n">mock_blob</span><span class="p">(</span>
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>    <span class="sa">b</span><span class="s2">&quot;image data&quot;</span><span class="p">,</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;photo.jpg&quot;</span><span class="p">,</span>
-<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>    <span class="n">uri</span><span class="o">=</span><span class="s2">&quot;https://mystorageaccount.blob.core.windows.net/images/photo.jpg&quot;</span><span class="p">,</span>
-<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>    <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">},</span>
-<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>    <span class="n">blob_properties</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ContentType&quot;</span><span class="p">:</span> <span class="s2">&quot;image/jpeg&quot;</span><span class="p">}</span>
-<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">azure_functions_test</span><span class="w"> </span><span class="kn">import</span> <span class="n">mock_blob</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># Simple blob</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">blob</span> <span class="o">=</span> <span class="n">mock_blob</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;file contents&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;data.txt&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="k">assert</span> <span class="n">blob</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> <span class="o">==</span> <span class="sa">b</span><span class="s2">&quot;file contents&quot;</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1"># With metadata and properties</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="n">blob</span> <span class="o">=</span> <span class="n">mock_blob</span><span class="p">(</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="sa">b</span><span class="s2">&quot;image data&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;photo.jpg&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>    <span class="n">uri</span><span class="o">=</span><span class="s2">&quot;https://mystorageaccount.blob.core.windows.net/images/photo.jpg&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>    <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">},</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>    <span class="n">blob_properties</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ContentType&quot;</span><span class="p">:</span> <span class="s2">&quot;image/jpeg&quot;</span><span class="p">}</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="p">)</span>
 </code></pre></div>
 <h3 id="service-bus">Service Bus<a class="headerlink" href="#service-bus" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">azure_functions_test</span><span class="w"> </span><span class="kn">import</span> <span class="n">mock_service_bus_message</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="c1"># Simple message</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">msg</span> <span class="o">=</span> <span class="n">mock_service_bus_message</span><span class="p">({</span><span class="s2">&quot;order_id&quot;</span><span class="p">:</span> <span class="mi">123</span><span class="p">})</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="k">assert</span> <span class="n">msg</span><span class="o">.</span><span class="n">get_body</span><span class="p">()</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;{&quot;order_id&quot;: 123}&#39;</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="c1"># Session-based message</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="n">msg</span> <span class="o">=</span> <span class="n">mock_service_bus_message</span><span class="p">(</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>    <span class="p">{</span><span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="s2">&quot;workflow&quot;</span><span class="p">},</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="n">message_id</span><span class="o">=</span><span class="s2">&quot;msg-session-1&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>    <span class="n">session_id</span><span class="o">=</span><span class="s2">&quot;workflow-123&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>    <span class="n">sequence_number</span><span class="o">=</span><span class="mi">1</span>
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="p">)</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>
-<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="c1"># Dead-lettered message</span>
-<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="n">msg</span> <span class="o">=</span> <span class="n">mock_service_bus_message</span><span class="p">(</span>
-<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>    <span class="sa">b</span><span class="s2">&quot;failed message&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>    <span class="n">dead_letter_source</span><span class="o">=</span><span class="s2">&quot;orders-queue&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>    <span class="n">dead_letter_reason</span><span class="o">=</span><span class="s2">&quot;ProcessingException&quot;</span><span class="p">,</span>
-<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>    <span class="n">delivery_count</span><span class="o">=</span><span class="mi">10</span>
-<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">azure_functions_test</span><span class="w"> </span><span class="kn">import</span> <span class="n">mock_service_bus_message</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="c1"># Simple message</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">msg</span> <span class="o">=</span> <span class="n">mock_service_bus_message</span><span class="p">({</span><span class="s2">&quot;order_id&quot;</span><span class="p">:</span> <span class="mi">123</span><span class="p">})</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="k">assert</span> <span class="n">msg</span><span class="o">.</span><span class="n">get_body</span><span class="p">()</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;{&quot;order_id&quot;: 123}&#39;</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1"># Session-based message</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="n">msg</span> <span class="o">=</span> <span class="n">mock_service_bus_message</span><span class="p">(</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>    <span class="p">{</span><span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="s2">&quot;workflow&quot;</span><span class="p">},</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    <span class="n">message_id</span><span class="o">=</span><span class="s2">&quot;msg-session-1&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>    <span class="n">session_id</span><span class="o">=</span><span class="s2">&quot;workflow-123&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>    <span class="n">sequence_number</span><span class="o">=</span><span class="mi">1</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="p">)</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="c1"># Dead-lettered message</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="n">msg</span> <span class="o">=</span> <span class="n">mock_service_bus_message</span><span class="p">(</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>    <span class="sa">b</span><span class="s2">&quot;failed message&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>    <span class="n">dead_letter_source</span><span class="o">=</span><span class="s2">&quot;orders-queue&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>    <span class="n">dead_letter_reason</span><span class="o">=</span><span class="s2">&quot;ProcessingException&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>    <span class="n">delivery_count</span><span class="o">=</span><span class="mi">10</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="p">)</span>
 </code></pre></div>
 <h3 id="event-grid">Event Grid<a class="headerlink" href="#event-grid" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">azure_functions_test</span><span class="w"> </span><span class="kn">import</span> <span class="n">mock_event_grid_event</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="c1"># Custom event</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">event</span> <span class="o">=</span> <span class="n">mock_event_grid_event</span><span class="p">(</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;order_id&quot;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;pending&quot;</span><span class="p">},</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="n">event_type</span><span class="o">=</span><span class="s2">&quot;myapp.order.created&quot;</span><span class="p">,</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="n">subject</span><span class="o">=</span><span class="s2">&quot;orders/123&quot;</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="p">)</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
-<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="c1"># Azure system event (Blob Created)</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="n">event</span> <span class="o">=</span> <span class="n">mock_event_grid_event</span><span class="p">(</span>
-<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
-<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>        <span class="s2">&quot;api&quot;</span><span class="p">:</span> <span class="s2">&quot;PutBlob&quot;</span><span class="p">,</span>
-<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>        <span class="s2">&quot;contentType&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
-<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://mystorageaccount.blob.core.windows.net/...&quot;</span><span class="p">,</span>
-<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>    <span class="p">},</span>
-<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>    <span class="n">event_type</span><span class="o">=</span><span class="s2">&quot;Microsoft.Storage.BlobCreated&quot;</span><span class="p">,</span>
-<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>    <span class="n">subject</span><span class="o">=</span><span class="s2">&quot;/blobServices/default/containers/data/blobs/file.json&quot;</span><span class="p">,</span>
-<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;/subscriptions/.../storageAccounts/...&quot;</span>
-<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">azure_functions_test</span><span class="w"> </span><span class="kn">import</span> <span class="n">mock_event_grid_event</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="c1"># Custom event</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">event</span> <span class="o">=</span> <span class="n">mock_event_grid_event</span><span class="p">(</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;order_id&quot;</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;pending&quot;</span><span class="p">},</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="n">event_type</span><span class="o">=</span><span class="s2">&quot;myapp.order.created&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    <span class="n">subject</span><span class="o">=</span><span class="s2">&quot;orders/123&quot;</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="p">)</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="c1"># Azure system event (Blob Created)</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="n">event</span> <span class="o">=</span> <span class="n">mock_event_grid_event</span><span class="p">(</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>        <span class="s2">&quot;api&quot;</span><span class="p">:</span> <span class="s2">&quot;PutBlob&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>        <span class="s2">&quot;contentType&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://mystorageaccount.blob.core.windows.net/...&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>    <span class="p">},</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>    <span class="n">event_type</span><span class="o">=</span><span class="s2">&quot;Microsoft.Storage.BlobCreated&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>    <span class="n">subject</span><span class="o">=</span><span class="s2">&quot;/blobServices/default/containers/data/blobs/file.json&quot;</span><span class="p">,</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>    <span class="n">topic</span><span class="o">=</span><span class="s2">&quot;/subscriptions/.../storageAccounts/...&quot;</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="output-bindings">Output Bindings<a class="headerlink" href="#output-bindings" title="Permanent link">&para;</a></h2>
 <p>Capture output bindings with <code>FunctionTestContext</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">azure_functions_test</span><span class="w"> </span><span class="kn">import</span> <span class="n">FunctionTestContext</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_function_with_output</span><span class="p">():</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="c1"># Arrange</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="n">ctx</span> <span class="o">=</span> <span class="n">FunctionTestContext</span><span class="p">()</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>    <span class="c1"># Act - pass ctx.out(&quot;binding_name&quot;) to your function</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>    <span class="n">my_function</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="s2">&quot;queue&quot;</span><span class="p">),</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="s2">&quot;blob&quot;</span><span class="p">))</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>    <span class="c1"># Assert on outputs</span>
-<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>    <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;queue&quot;</span><span class="p">][</span><span class="s2">&quot;message&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;processed&quot;</span>
-<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>    <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;blob&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s2">&quot;result data&quot;</span>
-<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>
-<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>    <span class="c1"># Check if output was set</span>
-<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>    <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">is_set</span><span class="p">(</span><span class="s2">&quot;queue&quot;</span><span class="p">)</span>
-<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>    <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">is_set</span><span class="p">(</span><span class="s2">&quot;blob&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">azure_functions_test</span><span class="w"> </span><span class="kn">import</span> <span class="n">FunctionTestContext</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_function_with_output</span><span class="p">():</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="c1"># Arrange</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="n">ctx</span> <span class="o">=</span> <span class="n">FunctionTestContext</span><span class="p">()</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="c1"># Act - pass ctx.out(&quot;binding_name&quot;) to your function</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    <span class="n">my_function</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="s2">&quot;queue&quot;</span><span class="p">),</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="s2">&quot;blob&quot;</span><span class="p">))</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    <span class="c1"># Assert on outputs</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>    <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;queue&quot;</span><span class="p">][</span><span class="s2">&quot;message&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;processed&quot;</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>    <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;blob&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s2">&quot;result data&quot;</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>    <span class="c1"># Check if output was set</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>    <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">is_set</span><span class="p">(</span><span class="s2">&quot;queue&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>    <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">is_set</span><span class="p">(</span><span class="s2">&quot;blob&quot;</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="real-world-example">Real-World Example<a class="headerlink" href="#real-world-example" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">azure.functions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">func</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">azure_functions_test</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    <span class="n">mock_service_bus_message</span><span class="p">,</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    <span class="n">mock_blob</span><span class="p">,</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>    <span class="n">FunctionTestContext</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="p">)</span>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">process_order</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="n">func</span><span class="o">.</span><span class="n">ServiceBusMessage</span><span class="p">,</span> <span class="n">blob_out</span><span class="p">:</span> <span class="n">func</span><span class="o">.</span><span class="n">Out</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]):</span>
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Process order from Service Bus and write receipt to Blob.&quot;&quot;&quot;</span>
-<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>    <span class="n">order</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
-<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>
-<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>    <span class="c1"># Business logic</span>
-<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>    <span class="n">receipt</span> <span class="o">=</span> <span class="p">{</span>
-<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>        <span class="s2">&quot;order_id&quot;</span><span class="p">:</span> <span class="n">order</span><span class="p">[</span><span class="s2">&quot;order_id&quot;</span><span class="p">],</span>
-<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>        <span class="s2">&quot;processed_at&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">UTC</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
-<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;completed&quot;</span>
-<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>    <span class="p">}</span>
-<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>
-<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>    <span class="c1"># Write to blob output binding</span>
-<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>    <span class="n">blob_out</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">receipt</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
-<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a>
-<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a><span class="c1"># Test</span>
-<a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_process_order</span><span class="p">():</span>
-<a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a>    <span class="c1"># Arrange</span>
-<a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a>    <span class="n">msg</span> <span class="o">=</span> <span class="n">mock_service_bus_message</span><span class="p">(</span>
-<a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a>        <span class="p">{</span><span class="s2">&quot;order_id&quot;</span><span class="p">:</span> <span class="mi">12345</span><span class="p">,</span> <span class="s2">&quot;customer_id&quot;</span><span class="p">:</span> <span class="mi">67890</span><span class="p">},</span>
-<a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a>        <span class="n">message_id</span><span class="o">=</span><span class="s2">&quot;order-12345&quot;</span><span class="p">,</span>
-<a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a>        <span class="n">session_id</span><span class="o">=</span><span class="s2">&quot;customer-67890&quot;</span>
-<a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a>    <span class="p">)</span>
-<a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a>    <span class="n">ctx</span> <span class="o">=</span> <span class="n">FunctionTestContext</span><span class="p">()</span>
-<a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a>
-<a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a>    <span class="c1"># Act</span>
-<a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a>    <span class="n">process_order</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="s2">&quot;receipt&quot;</span><span class="p">))</span>
-<a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a>
-<a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a>    <span class="c1"># Assert</span>
-<a id="__codelineno-11-36" name="__codelineno-11-36" href="#__codelineno-11-36"></a>    <span class="n">receipt</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;receipt&quot;</span><span class="p">])</span>
-<a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a>    <span class="k">assert</span> <span class="n">receipt</span><span class="p">[</span><span class="s2">&quot;order_id&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">12345</span>
-<a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a>    <span class="k">assert</span> <span class="n">receipt</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;completed&quot;</span>
-<a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a>    <span class="k">assert</span> <span class="s2">&quot;processed_at&quot;</span> <span class="ow">in</span> <span class="n">receipt</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">azure.functions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">func</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">azure_functions_test</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    <span class="n">mock_service_bus_message</span><span class="p">,</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="n">FunctionTestContext</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="p">)</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">process_order</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="n">func</span><span class="o">.</span><span class="n">ServiceBusMessage</span><span class="p">,</span> <span class="n">blob_out</span><span class="p">:</span> <span class="n">func</span><span class="o">.</span><span class="n">Out</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]):</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Process order from Service Bus and write receipt to Blob.&quot;&quot;&quot;</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>    <span class="n">order</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>    <span class="c1"># Business logic</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>    <span class="n">receipt</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>        <span class="s2">&quot;order_id&quot;</span><span class="p">:</span> <span class="n">order</span><span class="p">[</span><span class="s2">&quot;order_id&quot;</span><span class="p">],</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>        <span class="s2">&quot;processed_at&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">UTC</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;completed&quot;</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>    <span class="p">}</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>    <span class="c1"># Write to blob output binding</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>    <span class="n">blob_out</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">receipt</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a><span class="c1"># Test</span>
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_process_order</span><span class="p">():</span>
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>    <span class="c1"># Arrange</span>
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>    <span class="n">msg</span> <span class="o">=</span> <span class="n">mock_service_bus_message</span><span class="p">(</span>
+<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>        <span class="p">{</span><span class="s2">&quot;order_id&quot;</span><span class="p">:</span> <span class="mi">12345</span><span class="p">,</span> <span class="s2">&quot;customer_id&quot;</span><span class="p">:</span> <span class="mi">67890</span><span class="p">},</span>
+<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>        <span class="n">message_id</span><span class="o">=</span><span class="s2">&quot;order-12345&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>        <span class="n">session_id</span><span class="o">=</span><span class="s2">&quot;customer-67890&quot;</span>
+<a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a>    <span class="p">)</span>
+<a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a>    <span class="n">ctx</span> <span class="o">=</span> <span class="n">FunctionTestContext</span><span class="p">()</span>
+<a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a>
+<a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a>    <span class="c1"># Act</span>
+<a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a>    <span class="n">process_order</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="s2">&quot;receipt&quot;</span><span class="p">))</span>
+<a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a>
+<a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a>    <span class="c1"># Assert</span>
+<a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a>    <span class="n">receipt</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;receipt&quot;</span><span class="p">])</span>
+<a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a>    <span class="k">assert</span> <span class="n">receipt</span><span class="p">[</span><span class="s2">&quot;order_id&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">12345</span>
+<a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a>    <span class="k">assert</span> <span class="n">receipt</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;completed&quot;</span>
+<a id="__codelineno-10-38" name="__codelineno-10-38" href="#__codelineno-10-38"></a>    <span class="k">assert</span> <span class="s2">&quot;processed_at&quot;</span> <span class="ow">in</span> <span class="n">receipt</span>
 </code></pre></div>
-<hr />
-<h2 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h2>
-<p><strong>✅ Full Implementation - 203 Tests Passing</strong></p>
-<p>All 6 core trigger types fully implemented with comprehensive test coverage:
-- ✅ Queue Storage mock with Pydantic validation (32 tests)
-- ✅ HTTP Request mock with form data support (34 tests)
-- ✅ Timer mock with schedule tracking (18 tests)
-- ✅ Blob Storage mock with stream support (28 tests)
-- ✅ Service Bus mock with complete property coverage (62 tests)
-- ✅ Event Grid mock with factory functions (37 tests)</p>
-<p><strong>Metrics:</strong>
-- 203 tests passing (+60 comprehensive tests added)
-- 75.94% code coverage
-- Pyright strict mode: 0 errors
-- Complete API documentation with all features</p>
-<hr />
-<h2 id="roadmap">Roadmap<a class="headerlink" href="#roadmap" title="Permanent link">&para;</a></h2>
-<ul>
-<li>[x] <strong>Week 1:</strong> Core infrastructure and type system ✅</li>
-<li>[x] <strong>Week 2:</strong> Core mocks (Queue, HTTP, Timer, Blob) ✅</li>
-<li>[x] <strong>Week 3:</strong> Extended mocks (ServiceBus, EventGrid) ✅</li>
-<li>[x] <strong>Week 3:</strong> Documentation and API reference ✅</li>
-<li>[x] <strong>Week 4:</strong> Enhanced features (form data, schedule tracking, factory functions) ✅</li>
-<li>[x] <strong>Week 4:</strong> CI/CD workflows and comprehensive testing ✅</li>
-<li>[ ] <strong>Week 5:</strong> PyPI release preparation ⏳</li>
-<li>[ ] <strong>Week 5:</strong> Advanced features + Cosmos mock</li>
-<li>[ ] <strong>Week 6:</strong> Beta release + community feedback</li>
-<li>[ ] <strong>Post-Launch:</strong> Stable v1.0.0 release</li>
-</ul>
 <hr />
 <h2 id="api-reference">API Reference<a class="headerlink" href="#api-reference" title="Permanent link">&para;</a></h2>
 <h3 id="mock-factory-functions">Mock Factory Functions<a class="headerlink" href="#mock-factory-functions" title="Permanent link">&para;</a></h3>
-<p>All factory functions follow the same pattern:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">mock_</span><span class="o">&lt;</span><span class="n">trigger_name</span><span class="o">&gt;</span><span class="p">(</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="n">body_or_data</span><span class="p">,</span>           <span class="c1"># Positional: main data</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="o">*</span><span class="p">,</span>                      <span class="c1"># Keyword-only args</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="n">trigger_specific_args</span>   <span class="c1"># e.g., message_id, session_id, etc.</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="p">)</span>
-</code></pre></div></p>
+<p>All factory functions follow the same pattern:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">mock_</span><span class="o">&lt;</span><span class="n">trigger_name</span><span class="o">&gt;</span><span class="p">(</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    <span class="n">body_or_data</span><span class="p">,</span>           <span class="c1"># Positional: main data</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    <span class="o">*</span><span class="p">,</span>                      <span class="c1"># Keyword-only args</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    <span class="n">trigger_specific_args</span>   <span class="c1"># e.g., message_id, session_id, etc.</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="p">)</span>
+</code></pre></div>
 <table>
 <thead>
 <tr>
@@ -1389,19 +1284,20 @@
 </tr>
 </tbody>
 </table>
+<p>See the <a href="./api/">API Reference</a> for detailed documentation of each function.</p>
 <h3 id="functiontestcontext">FunctionTestContext<a class="headerlink" href="#functiontestcontext" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">FunctionTestContext</span><span class="p">:</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Out</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get output binding by name.&quot;&quot;&quot;</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>    <span class="nd">@property</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all captured outputs.&quot;&quot;&quot;</span>
-<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>
-<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">is_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if output binding was set.&quot;&quot;&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">FunctionTestContext</span><span class="p">:</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Out</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get output binding by name.&quot;&quot;&quot;</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>    <span class="nd">@property</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all captured outputs.&quot;&quot;&quot;</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">is_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if output binding was set.&quot;&quot;&quot;</span>
 </code></pre></div>
-<p>See inline docstrings for full parameter documentation.</p>
+<p>See the <a href="api/context/">Context API documentation</a> for more details.</p>
 <hr />
 <h2 id="design-principles">Design Principles<a class="headerlink" href="#design-principles" title="Permanent link">&para;</a></h2>
 <ol>
@@ -1412,75 +1308,38 @@
 <li><strong>Fail Fast, Fail Clear</strong> - Type errors caught at test time with clear messages</li>
 </ol>
 <hr />
-<h2 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong><a href="./api/">API Reference</a></strong> - Complete API documentation</li>
-<li><a href="api/mocks/">Mocks API</a> - All 6 mock functions</li>
-<li><a href="api/context/">Context API</a> - Output binding capture</li>
-<li><a href="api/protocols/">Protocols</a> - Type definitions</li>
-<li><strong><a href="./examples/basic/">Examples</a></strong> - Working code examples for all triggers</li>
-<li><strong><a href="development/style-guide/">Style Guide</a></strong> - Coding standards for contributors</li>
-</ul>
-<hr />
 <h2 id="contributing">Contributing<a class="headerlink" href="#contributing" title="Permanent link">&para;</a></h2>
-<p>Contributions welcome! See <a href="development/style-guide/">style-guide.md</a> for coding standards.</p>
+<p>Contributions welcome! Please read the <a href="https://github.com/sudzxd/azure-functions-test/blob/main/CONTRIBUTING.md">Contributing Guide</a>.</p>
 <p><strong>Development Setup:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/sudzxd/azure-functions-test
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nb">cd</span><span class="w"> </span>azure-functions-test
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>uv<span class="w"> </span>sync<span class="w"> </span>--all-extras
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="nv">PYTHONPATH</span><span class="o">=</span>src<span class="w"> </span>uv<span class="w"> </span>run<span class="w"> </span>pytest
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/sudzxd/azure-functions-test
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nb">cd</span><span class="w"> </span>azure-functions-test
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>uv<span class="w"> </span>sync<span class="w"> </span>--all-extras
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="nv">PYTHONPATH</span><span class="o">=</span>src<span class="w"> </span>uv<span class="w"> </span>run<span class="w"> </span>pytest
 </code></pre></div>
-<p><strong>Run all checks:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>uv<span class="w"> </span>run<span class="w"> </span>ruff<span class="w"> </span>check<span class="w"> </span>.<span class="w">              </span><span class="c1"># Linting</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nv">PYTHONPATH</span><span class="o">=</span>src<span class="w"> </span>uv<span class="w"> </span>run<span class="w"> </span>pyright<span class="w">    </span><span class="c1"># Type checking</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="nv">PYTHONPATH</span><span class="o">=</span>src<span class="w"> </span>uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w">     </span><span class="c1"># Tests with coverage</span>
-</code></pre></div></p>
+<p><strong>Run all checks:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>uv<span class="w"> </span>run<span class="w"> </span>ruff<span class="w"> </span>check<span class="w"> </span>.<span class="w">              </span><span class="c1"># Linting</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nv">PYTHONPATH</span><span class="o">=</span>src<span class="w"> </span>uv<span class="w"> </span>run<span class="w"> </span>pyright<span class="w">    </span><span class="c1"># Type checking</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="nv">PYTHONPATH</span><span class="o">=</span>src<span class="w"> </span>uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w">     </span><span class="c1"># Tests with coverage</span>
+</code></pre></div>
 <hr />
-<h2 id="tech-stack">Tech Stack<a class="headerlink" href="#tech-stack" title="Permanent link">&para;</a></h2>
+<h2 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h2>
+<p>See <a href="https://github.com/sudzxd/azure-functions-test/blob/main/CHANGELOG.md">CHANGELOG</a> for release history.</p>
 <ul>
-<li><strong>Python:</strong> 3.11+ (3.11, 3.12, 3.13 supported)</li>
-<li><strong>Package Management:</strong> <a href="https://github.com/astral-sh/uv">uv</a></li>
-<li><strong>Linting + Formatting:</strong> <a href="https://github.com/astral-sh/ruff">Ruff</a></li>
-<li><strong>Type Checking:</strong> <a href="https://github.com/microsoft/pyright">Pyright</a> (strict mode)</li>
-<li><strong>Testing:</strong> pytest + pytest-cov</li>
-<li><strong>Security:</strong> Bandit + pip-audit</li>
-<li><strong>CI/CD:</strong> GitHub Actions (coming soon)</li>
-<li><strong>Documentation:</strong> MkDocs Material (coming soon)</li>
+<li>203 tests passing</li>
+<li>75.94% code coverage</li>
+<li>Pyright strict mode: 0 errors</li>
+<li>All 6 core trigger types fully implemented</li>
 </ul>
-<hr />
-<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>Python 3.11 or higher</strong> (3.11, 3.12, 3.13)</li>
-<li><strong>Dependencies:</strong> <code>azure-functions&gt;=1.17.0</code></li>
-</ul>
-<p><strong>Why Python 3.11+?</strong>
-- Native <code>|</code> union type syntax (cleaner code, no <code>Optional</code> imports)
-- 25% performance improvement over Python 3.10
-- Better error messages and debugging experience
-- Modern type system features (Self type, TypeVarTuple, etc.)</p>
 <hr />
 <h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
-<p>MIT License</p>
-<p>Copyright (c) 2025 Sudarshan</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.</p>
-<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.</p>
+<p>Distributed under the MIT License. See <a href="https://github.com/sudzxd/azure-functions-test/blob/main/LICENSE">LICENSE</a> for more information.</p>
 <hr />
-<h2 id="contact">Contact<a class="headerlink" href="#contact" title="Permanent link">&para;</a></h2>
-<p><strong>Author:</strong> Sudarshan
-<strong>Status:</strong> Alpha Release (v1.17.0a1) - <a href="https://pypi.org/project/azure-functions-test/">Available on PyPI</a></p>
+<h2 id="links">Links<a class="headerlink" href="#links" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Repository</strong>: <a href="https://github.com/sudzxd/azure-functions-test">github.com/sudzxd/azure-functions-test</a></li>
+<li><strong>PyPI</strong>: <a href="https://pypi.org/project/azure-functions-test/">pypi.org/project/azure-functions-test</a></li>
+<li><strong>Issues</strong>: <a href="https://github.com/sudzxd/azure-functions-test/issues">GitHub Issues</a></li>
+</ul>
 <hr />
 <p><strong>⭐ Star this repo to follow progress!</strong></p>
 
