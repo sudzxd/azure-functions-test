@@ -1,0 +1,67 @@
+minimum_pre_commit_version: "3.0.0"
+
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: "v0.8.4"
+    hooks:
+      - id: ruff
+        args: ["--fix"]
+      - id: ruff-format
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: mixed-line-ending
+
+  - repo: https://github.com/tox-dev/pyproject-fmt
+    rev: "v2.5.0"
+    hooks:
+      - id: pyproject-fmt
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.3.0
+    hooks:
+      - id: codespell
+        args:
+          - --write-changes
+          - --skip=*.lock,*.json,*.pyc,htmlcov,dist,build,.git,.venv,__pycache__,uv.lock
+          - --ignore-words-list=hel
+
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.10.0
+    hooks:
+      - id: python-use-type-annotations
+
+  - repo: https://github.com/RobertCraigie/pyright-python
+    rev: v1.1.390
+    hooks:
+      - id: pyright
+        additional_dependencies:
+          - pydantic>=2.0
+          - azure-functions>=1.17.0
+        # Manual because pyright is expensive to run
+        stages: [manual]
+
+  - repo: local
+    hooks:
+      - id: changelog-format
+        name: Changelog entry format
+        language: pygrep
+        entry: >
+          (?x)
+          ^changelog/\d+\.(
+            feature|
+            bugfix|
+            breaking|
+            deprecation|
+            doc|
+            misc
+          )\.rst$
+        files: ^changelog/
+        exclude: ^changelog/(README\.rst|_template\.rst)$

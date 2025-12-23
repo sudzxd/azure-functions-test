@@ -1,7 +1,6 @@
 # azure-functions-test
 
 > **Unit test Azure Functions without the runtime.**
-<!-- Updated: 2025-12-22 -->
 
 Fast, ergonomic, type-safe mock objects for testing Azure Functions. No runtime, no Azurite, no boilerplate.
 
@@ -11,23 +10,6 @@ Fast, ergonomic, type-safe mock objects for testing Azure Functions. No runtime,
 [![Coverage](https://img.shields.io/badge/coverage-75.94%25-brightgreen.svg)](https://github.com/sudzxd/azure-functions-test)
 [![Code Style: Ruff](https://img.shields.io/badge/code%20style-ruff-black.svg)](https://github.com/astral-sh/ruff)
 [![Type Checked: Pyright](https://img.shields.io/badge/type%20checked-pyright-blue.svg)](https://github.com/microsoft/pyright)
-
-**Requires Python 3.11+** for optimal performance and modern syntax support.
-
----
-
-## Versioning Strategy
-
-This package follows **version-compatible versioning** with the `azure-functions` library:
-
-- `1.17.0a1` = Alpha release compatible with `azure-functions>=1.17.0`
-- `1.17.0` = Stable release for `azure-functions 1.17.x`
-- `1.18.0` = When we add support for `azure-functions 1.18.x`
-
-**Current compatibility:**
-- Azure Functions: `>=1.17.0`
-- Python: `3.11+`
-- Pydantic: `>=2.0`
 
 ---
 
@@ -51,78 +33,57 @@ def test_process_order():
 
 ---
 
-## Why This Library?
-
-| Current Approach | Problem |
-|-----------------|---------|
-| **`func start` + Azurite** | Slow (5-10s startup), flaky, requires Docker |
-| **Manual mocking** | Tedious boilerplate, inconsistent across projects |
-| **Integration tests only** | Slow feedback loop, hard to test edge cases |
-| **No testing** | Bugs in production 🙃 |
-
-**This library fills the gap:** Ergonomic mocks, output capture, zero runtime dependency.
-
----
-
 ## Features
 
-✅ **6 Trigger Types Supported**
-- Queue Storage
-- HTTP (with form data, JSON, body type auto-detection)
-- Timer (with schedule and past-due tracking)
-- Blob Storage (with metadata and properties)
-- Service Bus (with sessions, dead-letter, correlation)
-- Event Grid (with custom and Azure system events)
-
-✅ **Zero Runtime Dependency**
-- Pure Python mocks using Pydantic dataclasses
-- No `func start` required
-- No Azurite or Docker needed
-- Tests run in milliseconds, not seconds
-
-✅ **Type-Safe**
-- Full Pyright strict mode coverage (0 errors)
-- Structural typing with Protocol types
-- Auto-complete in VS Code
-- Catch errors at test time, not runtime
-
-✅ **SDK-Compatible**
-- Drop-in replacements for `azure-functions` types
-- All methods and properties work (`get_body()`, `get_json()`, etc.)
-- Implements Azure SDK protocols for maximum compatibility
-
-✅ **Minimal Ceremony**
-- Simple factory functions with smart defaults
-- Only specify data you care about
-- Lazy initialization for performance
-
-✅ **Output Capture**
-- Explicit output binding capture with `ctx.out("binding_name")`
-- Type-safe assertions with `ctx.outputs`
-- No magic, full control
+- **6 Trigger Types Supported**: Queue Storage, HTTP, Timer, Blob Storage, Service Bus, Event Grid
+- **Zero Runtime Dependency**: Pure Python mocks using Pydantic - no `func start`, Azurite, or Docker needed
+- **Type-Safe**: Full Pyright strict mode coverage (0 errors) with auto-complete support
+- **SDK-Compatible**: Drop-in replacements for `azure-functions` types with all methods and properties
+- **Minimal Ceremony**: Simple factory functions with smart defaults - only specify data you care about
+- **Output Capture**: Explicit output binding capture with `FunctionTestContext` for type-safe assertions
+- **Fast**: Tests run in milliseconds, not seconds
 
 ---
 
 ## Installation
 
-Install from PyPI:
-
 ```bash
 pip install azure-functions-test
 ```
 
-For the latest alpha release:
-```bash
-pip install azure-functions-test==1.17.0a1
-```
-
-Or install from source for development:
+For development:
 
 ```bash
 git clone https://github.com/sudzxd/azure-functions-test
 cd azure-functions-test
 uv sync --all-extras
 ```
+
+---
+
+## Versioning
+
+This package follows **version-compatible versioning** with the `azure-functions` library.
+
+See [CHANGELOG](https://github.com/sudzxd/azure-functions-test/blob/main/CHANGELOG.md) for version history and compatibility details.
+
+**Requirements:**
+- Python: `3.11+`
+- Azure Functions: `>=1.17.0`
+- Pydantic: `>=2.0`
+
+---
+
+## Why This Library?
+
+| Current Approach           | Problem                                           |
+| -------------------------- | ------------------------------------------------- |
+| **`func start` + Azurite** | Slow (5-10s startup), flaky, requires Docker      |
+| **Manual mocking**         | Tedious boilerplate, inconsistent across projects |
+| **Integration tests only** | Slow feedback loop, hard to test edge cases       |
+| **No testing**             | Bugs in production                                |
+
+**This library fills the gap:** Fast, ergonomic mocks with output capture and zero runtime dependency.
 
 ---
 
@@ -293,7 +254,6 @@ def test_function_with_output():
 import azure.functions as func
 from azure_functions_test import (
     mock_service_bus_message,
-    mock_blob,
     FunctionTestContext
 )
 
@@ -333,46 +293,12 @@ def test_process_order():
 
 ---
 
-## Status
-
-**✅ Full Implementation - 203 Tests Passing**
-
-All 6 core trigger types fully implemented with comprehensive test coverage:
-- ✅ Queue Storage mock with Pydantic validation (32 tests)
-- ✅ HTTP Request mock with form data support (34 tests)
-- ✅ Timer mock with schedule tracking (18 tests)
-- ✅ Blob Storage mock with stream support (28 tests)
-- ✅ Service Bus mock with complete property coverage (62 tests)
-- ✅ Event Grid mock with factory functions (37 tests)
-
-**Metrics:**
-- 203 tests passing (+60 comprehensive tests added)
-- 75.94% code coverage
-- Pyright strict mode: 0 errors
-- Complete API documentation with all features
-
----
-
-## Roadmap
-
-- [x] **Week 1:** Core infrastructure and type system ✅
-- [x] **Week 2:** Core mocks (Queue, HTTP, Timer, Blob) ✅
-- [x] **Week 3:** Extended mocks (ServiceBus, EventGrid) ✅
-- [x] **Week 3:** Documentation and API reference ✅
-- [x] **Week 4:** Enhanced features (form data, schedule tracking, factory functions) ✅
-- [x] **Week 4:** CI/CD workflows and comprehensive testing ✅
-- [ ] **Week 5:** PyPI release preparation ⏳
-- [ ] **Week 5:** Advanced features + Cosmos mock
-- [ ] **Week 6:** Beta release + community feedback
-- [ ] **Post-Launch:** Stable v1.0.0 release
-
----
-
 ## API Reference
 
 ### Mock Factory Functions
 
 All factory functions follow the same pattern:
+
 ```python
 mock_<trigger_name>(
     body_or_data,           # Positional: main data
@@ -381,14 +307,16 @@ mock_<trigger_name>(
 )
 ```
 
-| Function | Description |
-|----------|-------------|
-| `mock_queue_message()` | Create Queue Storage message |
-| `mock_http_request()` | Create HTTP request |
-| `mock_timer_request()` | Create Timer trigger |
-| `mock_blob()` | Create Blob input stream |
-| `mock_service_bus_message()` | Create Service Bus message |
-| `mock_event_grid_event()` | Create Event Grid event |
+| Function                     | Description                  |
+| ---------------------------- | ---------------------------- |
+| `mock_queue_message()`       | Create Queue Storage message |
+| `mock_http_request()`        | Create HTTP request          |
+| `mock_timer_request()`       | Create Timer trigger         |
+| `mock_blob()`                | Create Blob input stream     |
+| `mock_service_bus_message()` | Create Service Bus message   |
+| `mock_event_grid_event()`    | Create Event Grid event      |
+
+See the [API Reference](./api/) for detailed documentation of each function.
 
 ### FunctionTestContext
 
@@ -405,7 +333,7 @@ class FunctionTestContext:
         """Check if output binding was set."""
 ```
 
-See inline docstrings for full parameter documentation.
+See the [Context API documentation](./api/context.md) for more details.
 
 ---
 
@@ -419,20 +347,9 @@ See inline docstrings for full parameter documentation.
 
 ---
 
-## Documentation
-
-- **[API Reference](./api/)** - Complete API documentation
-  - [Mocks API](./api/mocks.md) - All 6 mock functions
-  - [Context API](./api/context.md) - Output binding capture
-  - [Protocols](./api/protocols.md) - Type definitions
-- **[Examples](./examples/basic/)** - Working code examples for all triggers
-- **[Style Guide](./development/style-guide.md)** - Coding standards for contributors
-
----
-
 ## Contributing
 
-Contributions welcome! See [style-guide.md](./development/style-guide.md) for coding standards.
+Contributions welcome! Please read the [Contributing Guide](https://github.com/sudzxd/azure-functions-test/blob/main/CONTRIBUTING.md).
 
 **Development Setup:**
 
@@ -444,6 +361,7 @@ PYTHONPATH=src uv run pytest
 ```
 
 **Run all checks:**
+
 ```bash
 uv run ruff check .              # Linting
 PYTHONPATH=src uv run pyright    # Type checking
@@ -452,62 +370,28 @@ PYTHONPATH=src uv run pytest     # Tests with coverage
 
 ---
 
-## Tech Stack
+## Status
 
-- **Python:** 3.11+ (3.11, 3.12, 3.13 supported)
-- **Package Management:** [uv](https://github.com/astral-sh/uv)
-- **Linting + Formatting:** [Ruff](https://github.com/astral-sh/ruff)
-- **Type Checking:** [Pyright](https://github.com/microsoft/pyright) (strict mode)
-- **Testing:** pytest + pytest-cov
-- **Security:** Bandit + pip-audit
-- **CI/CD:** GitHub Actions (coming soon)
-- **Documentation:** MkDocs Material (coming soon)
+See [CHANGELOG](https://github.com/sudzxd/azure-functions-test/blob/main/CHANGELOG.md) for release history.
 
----
-
-## Requirements
-
-- **Python 3.11 or higher** (3.11, 3.12, 3.13)
-- **Dependencies:** `azure-functions>=1.17.0`
-
-**Why Python 3.11+?**
-- Native `|` union type syntax (cleaner code, no `Optional` imports)
-- 25% performance improvement over Python 3.10
-- Better error messages and debugging experience
-- Modern type system features (Self type, TypeVarTuple, etc.)
+- 203 tests passing
+- 75.94% code coverage
+- Pyright strict mode: 0 errors
+- All 6 core trigger types fully implemented
 
 ---
 
 ## License
 
-MIT License
-
-Copyright (c) 2025 Sudarshan
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Distributed under the MIT License. See [LICENSE](https://github.com/sudzxd/azure-functions-test/blob/main/LICENSE) for more information.
 
 ---
 
-## Contact
+## Links
 
-**Author:** Sudarshan
-**Status:** Alpha Release (v1.17.0a1) - [Available on PyPI](https://pypi.org/project/azure-functions-test/)
+- **Repository**: [github.com/sudzxd/azure-functions-test](https://github.com/sudzxd/azure-functions-test)
+- **PyPI**: [pypi.org/project/azure-functions-test](https://pypi.org/project/azure-functions-test/)
+- **Issues**: [GitHub Issues](https://github.com/sudzxd/azure-functions-test/issues)
 
 ---
 
