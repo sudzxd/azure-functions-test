@@ -13,10 +13,11 @@ Thank you for your interest in contributing! This document provides guidelines a
 - [Code Quality Standards](#code-quality-standards)
 - [Testing](#testing)
 - [Documentation](#documentation)
+- [Release Process](#release-process)
 
 ## Code of Conduct
 
-Be respectful, inclusive, and constructive in all interactions. We're here to build great software together.
+This project adheres to the Contributor Covenant [Code of Conduct](./CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to the project maintainers.
 
 ## Getting Started
 
@@ -35,6 +36,9 @@ cd azure-functions-test
 
 # Install dependencies
 uv sync --all-extras
+
+# Install pre-commit hooks
+uv run pre-commit install
 
 # Verify setup
 PYTHONPATH=src uv run pytest
@@ -194,11 +198,20 @@ Closes #10
 ### Quality Checks
 
 ```bash
-# Run all checks (must pass before PR)
+# Run pre-commit on all files
+uv run pre-commit run --all-files
+
+# Or run individual checks
 uv run ruff format --check .         # Formatting
 uv run ruff check .                  # Linting
 PYTHONPATH=src uv run pyright        # Type checking
 PYTHONPATH=src uv run pytest         # Tests
+```
+
+**Note**: Pre-commit hooks automatically run on `git commit`. To skip hooks temporarily (not recommended):
+
+```bash
+git commit --no-verify
 ```
 
 ### PR Title Format
@@ -342,47 +355,13 @@ def mock_cosmos_db_trigger(
 
 ## Release Process
 
-Maintainers handle releases, but here's the process:
+Maintainers handle releases. See [RELEASING.md](./RELEASING.md) for the complete release process documentation, including:
 
-1. **Create Release Branch**: Branch from `develop` with name `release/vX.Y.Z`
-   ```bash
-   git checkout develop
-   git pull origin develop
-   git checkout -b release/v1.17.0
-   ```
-
-2. **Rebase Main**: Rebase `main` onto the release branch
-   ```bash
-   git fetch origin main
-   git rebase origin/main
-   ```
-
-3. **Push and Verify**: Push release branch and let CI build and verify
-   ```bash
-   git push origin release/v1.17.0
-   ```
-   - All tests must pass
-   - All quality checks must pass
-   - Build verification succeeds
-
-4. **Merge to Main**: Create PR from release branch to `main` (merge commit only)
-   - Review final changes
-   - Ensure CI is green
-   - Merge using merge commit (not squash)
-
-5. **Tag Release**: Create version tag on `main`
-   ```bash
-   git checkout main
-   git pull origin main
-   git tag -a v1.17.0 -m "Release v1.17.0"
-   git push origin v1.17.0
-   ```
-
-6. **Automatic Publishing**: GitHub Actions will automatically:
-   - Run full test suite
-   - Build package
-   - Publish to PyPI
-   - Create GitHub release with changelog
+- Versioning strategy
+- Manual and automated release methods
+- Steps for bug-fix, minor, major, and pre-releases
+- Post-release tasks
+- Troubleshooting
 
 ## Questions?
 
