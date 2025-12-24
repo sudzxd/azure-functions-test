@@ -20,6 +20,8 @@ from pydantic.dataclasses import dataclass
 
 # Project/Local
 from .._internal import get_logger, serialize_to_bytes
+from ..constants import DEFAULT_HTTP_METHOD, DEFAULT_HTTP_URL
+from ..enums import ContentType
 from ..protocols import HttpRequestProtocol
 
 # =============================================================================
@@ -65,8 +67,8 @@ class HttpRequestMock:
         {'name': 'Alice'}
     """
 
-    method: str = Field(default="GET")
-    url: str = Field(default="http://localhost")
+    method: str = Field(default=DEFAULT_HTTP_METHOD)
+    url: str = Field(default=DEFAULT_HTTP_URL)
     headers: dict[str, str] = Field(default_factory=dict)
     params: dict[str, str] = Field(default_factory=dict)
     route_params: dict[str, str] = Field(default_factory=dict)
@@ -93,7 +95,7 @@ class HttpRequestMock:
         """
         if self._form_cache is None:
             content_type = self.headers.get("Content-Type", "")
-            if "application/x-www-form-urlencoded" in content_type:
+            if ContentType.FORM_URLENCODED in content_type:
                 # Parse URL-encoded form data
                 body_str = self.body.decode("utf-8")
                 parsed = parse_qs(body_str, keep_blank_values=True)
@@ -160,8 +162,8 @@ class HttpRequestMock:
 def mock_http_request(
     body: dict[Any, Any] | str | bytes | None = None,
     *,
-    method: str = "GET",
-    url: str = "http://localhost",
+    method: str = DEFAULT_HTTP_METHOD,
+    url: str = DEFAULT_HTTP_URL,
     headers: dict[str, str] | None = None,
     params: dict[str, str] | None = None,
     route_params: dict[str, str] | None = None,
@@ -232,7 +234,7 @@ def mock_http_request(
     # Auto-set Content-Type header if not provided
     final_headers = dict(headers) if headers else {}
     if body and isinstance(body, dict) and "Content-Type" not in final_headers:
-        final_headers["Content-Type"] = "application/json"
+        final_headers["Content-Type"] = ContentType.JSON
 
     return HttpRequestMock(
         method=method,

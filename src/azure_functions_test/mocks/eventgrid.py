@@ -21,6 +21,19 @@ from pydantic.dataclasses import dataclass
 
 # Project/Local
 from .._internal import get_logger
+from ..constants import (
+    CUSTOM_EVENT_SUBJECT,
+    CUSTOM_EVENT_TYPE,
+    DEFAULT_BLOB_CONTENT_LENGTH,
+    DEFAULT_CONTAINER_NAME,
+    DEFAULT_EVENT_DATA_VERSION,
+    DEFAULT_EVENT_ID,
+    DEFAULT_EVENT_TOPIC,
+    DEFAULT_STORAGE_ACCOUNT,
+    EVENT_GRID_TIMESTAMP_FORMAT,
+    EVENT_GRID_TIMESTAMP_SUFFIX,
+)
+from ..enums import BlobOperation, BlobType, ContentType, EventGridEventType
 from ..protocols import EventGridEventProtocol
 from .base import filter_none
 
@@ -65,14 +78,12 @@ class EventGridEventMock:
         {'url': 'https://storage.blob.core.windows.net/test/file.txt'}
     """
 
-    id: str = Field(default="test-event-id")
-    topic: str = Field(
-        default="/subscriptions/sub-id/resourceGroups/rg/providers/Microsoft.EventGrid/topics/test-topic"
-    )
+    id: str = Field(default=DEFAULT_EVENT_ID)
+    topic: str = Field(default=DEFAULT_EVENT_TOPIC)
     subject: str = Field(default="test/subject")
-    event_type: str = Field(default="Test.Event")
+    event_type: str = Field(default=EventGridEventType.TEST_EVENT)
     event_time: datetime = Field(default_factory=lambda: datetime.now(UTC))
-    data_version: str = Field(default="1.0")
+    data_version: str = Field(default=DEFAULT_EVENT_DATA_VERSION)
     data: dict[str, Any] = Field(default_factory=dict)
 
     def get_json(self) -> Any:
@@ -168,8 +179,8 @@ def mock_event_grid_event(
     """
     logger.debug(
         "Creating EventGridEventMock with id=%s, event_type=%s",
-        id or "test-event-id",
-        event_type or "Test.Event",
+        id or DEFAULT_EVENT_ID,
+        event_type or EventGridEventType.TEST_EVENT,
     )
 
     return EventGridEventMock(
@@ -193,9 +204,9 @@ def mock_event_grid_event(
 def create_blob_created_event(
     blob_url: str,
     *,
-    container_name: str = "test-container",
+    container_name: str = DEFAULT_CONTAINER_NAME,
     blob_name: str | None = None,
-    storage_account: str = "teststorageaccount",
+    storage_account: str = DEFAULT_STORAGE_ACCOUNT,
     **kwargs: Any,
 ) -> EventGridEventProtocol:
     """Create a Blob Storage 'BlobCreated' event.
@@ -220,19 +231,20 @@ def create_blob_created_event(
     if blob_name is None:
         blob_name = blob_url.split("/")[-1]
 
+    timestamp = datetime.now().strftime(EVENT_GRID_TIMESTAMP_FORMAT)
     return mock_event_grid_event(
         data={
-            "api": "PutBlob",
+            "api": BlobOperation.PUT_BLOB,
             "clientRequestId": str(uuid.uuid4()),
             "requestId": str(uuid.uuid4()),
             "eTag": f'"0x{uuid.uuid4().hex[:16].upper()}"',
-            "contentType": "application/octet-stream",
-            "contentLength": 1024,
-            "blobType": "BlockBlob",
+            "contentType": ContentType.OCTET_STREAM,
+            "contentLength": DEFAULT_BLOB_CONTENT_LENGTH,
+            "blobType": BlobType.BLOCK_BLOB,
             "url": blob_url,
-            "sequencer": f"{datetime.now().strftime('%Y%m%d%H%M%S')}0000000000000",
+            "sequencer": f"{timestamp}{EVENT_GRID_TIMESTAMP_SUFFIX}",
         },
-        event_type="Microsoft.Storage.BlobCreated",
+        event_type=EventGridEventType.BLOB_CREATED,
         subject=f"/blobServices/default/containers/{container_name}/blobs/{blob_name}",
         topic=f"/subscriptions/{uuid.uuid4()}/resourceGroups/test-rg/providers/Microsoft.Storage/storageAccounts/{storage_account}",
         **kwargs,
@@ -242,9 +254,9 @@ def create_blob_created_event(
 def create_blob_deleted_event(
     blob_url: str,
     *,
-    container_name: str = "test-container",
+    container_name: str = DEFAULT_CONTAINER_NAME,
     blob_name: str | None = None,
-    storage_account: str = "teststorageaccount",
+    storage_account: str = DEFAULT_STORAGE_ACCOUNT,
     **kwargs: Any,
 ) -> EventGridEventProtocol:
     """Create a Blob Storage 'BlobDeleted' event.
@@ -269,17 +281,18 @@ def create_blob_deleted_event(
     if blob_name is None:
         blob_name = blob_url.split("/")[-1]
 
+    timestamp = datetime.now().strftime(EVENT_GRID_TIMESTAMP_FORMAT)
     return mock_event_grid_event(
         data={
-            "api": "DeleteBlob",
+            "api": BlobOperation.DELETE_BLOB,
             "clientRequestId": str(uuid.uuid4()),
             "requestId": str(uuid.uuid4()),
-            "contentType": "application/octet-stream",
-            "blobType": "BlockBlob",
+            "contentType": ContentType.OCTET_STREAM,
+            "blobType": BlobType.BLOCK_BLOB,
             "url": blob_url,
-            "sequencer": f"{datetime.now().strftime('%Y%m%d%H%M%S')}0000000000000",
+            "sequencer": f"{timestamp}{EVENT_GRID_TIMESTAMP_SUFFIX}",
         },
-        event_type="Microsoft.Storage.BlobDeleted",
+        event_type=EventGridEventType.BLOB_DELETED,
         subject=f"/blobServices/default/containers/{container_name}/blobs/{blob_name}",
         topic=f"/subscriptions/{uuid.uuid4()}/resourceGroups/test-rg/providers/Microsoft.Storage/storageAccounts/{storage_account}",
         **kwargs,
@@ -289,8 +302,8 @@ def create_blob_deleted_event(
 def create_custom_event(
     data: dict[str, Any],
     *,
-    event_type: str = "Custom.Application.Event",
-    subject: str = "custom/event",
+    event_type: str = CUSTOM_EVENT_TYPE,
+    subject: str = CUSTOM_EVENT_SUBJECT,
     **kwargs: Any,
 ) -> EventGridEventProtocol:
     """Create a custom application Event Grid event.

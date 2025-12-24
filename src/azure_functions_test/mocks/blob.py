@@ -15,6 +15,7 @@ from pydantic.dataclasses import dataclass
 
 # Project/Local
 from .._internal import get_logger
+from ..constants import DEFAULT_BLOB_NAME, DEFAULT_BLOB_URI
 from ..protocols import InputStreamProtocol
 
 # =============================================================================
@@ -60,11 +61,9 @@ class BlobMock:
         'photo.jpg'
     """
 
-    name: str | None = Field(default="test-blob.txt")
+    name: str | None = Field(default=DEFAULT_BLOB_NAME)
     content: bytes = Field(default=b"")
-    uri: str | None = Field(
-        default="https://test.blob.core.windows.net/container/test-blob.txt"
-    )
+    uri: str | None = Field(default=DEFAULT_BLOB_URI)
     _position: int = Field(default=0, init=False, repr=False)
 
     @property
@@ -179,7 +178,7 @@ def mock_blob(
     """
     logger.debug(
         "Creating BlobMock with name=%s, length=%s",
-        name or "test-blob.txt",
+        name or DEFAULT_BLOB_NAME,
         len(content) if content else 0,
     )
 
@@ -193,9 +192,7 @@ def mock_blob(
 
     # Build and return the mock
     return BlobMock(
-        name=name if name is not None else "test-blob.txt",
+        name=name if name is not None else DEFAULT_BLOB_NAME,
         content=encoded_content,
-        uri=uri
-        if uri is not None
-        else "https://test.blob.core.windows.net/container/test-blob.txt",
+        uri=uri if uri is not None else DEFAULT_BLOB_URI,
     )

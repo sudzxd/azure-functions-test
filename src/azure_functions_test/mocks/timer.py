@@ -19,6 +19,7 @@ from pydantic.dataclasses import dataclass
 
 # Project/Local
 from .._internal import get_logger
+from ..enums import ScheduleStatusKey
 from ..protocols import TimerRequestProtocol
 from .base import filter_none
 
@@ -74,9 +75,9 @@ class TimerRequestMock:
     past_due: bool = Field(default=False)
     schedule_status: dict[str, Any] = Field(
         default_factory=lambda: {
-            "Last": datetime.now(UTC),
-            "Next": datetime.now(UTC),
-            "LastUpdated": datetime.now(UTC),
+            ScheduleStatusKey.LAST: datetime.now(UTC),
+            ScheduleStatusKey.NEXT: datetime.now(UTC),
+            ScheduleStatusKey.LAST_UPDATED: datetime.now(UTC),
         }
     )
     schedule: dict[str, Any] = Field(default_factory=dict)

@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Centralized hardcoded values into `constants.py` and `enums.py` modules
+- Improved code coverage from 75.94% to 79.56%
+- Replaced duplicate constants in `base.py` with imports from centralized modules
+
 ## [1.17.0a1] - 2025-12-23
 
 ### Added
