@@ -7,7 +7,7 @@ Fast, ergonomic, type-safe mock objects for testing Azure Functions. No runtime,
 [![PyPI version](https://img.shields.io/pypi/v/azure-functions-test.svg)](https://pypi.org/project/azure-functions-test/)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Tests](https://img.shields.io/badge/tests-203%20passing-green.svg)](https://github.com/sudzxd/azure-functions-test)
-[![Coverage](https://img.shields.io/badge/coverage-75.94%25-brightgreen.svg)](https://github.com/sudzxd/azure-functions-test)
+[![Coverage](https://img.shields.io/badge/coverage-79.56%25-brightgreen.svg)](https://github.com/sudzxd/azure-functions-test)
 [![Code Style: Ruff](https://img.shields.io/badge/code%20style-ruff-black.svg)](https://github.com/astral-sh/ruff)
 [![Type Checked: Pyright](https://img.shields.io/badge/type%20checked-pyright-blue.svg)](https://github.com/microsoft/pyright)
 
@@ -128,7 +128,7 @@ PYTHONPATH=src uv run pytest     # Tests with coverage
 See [CHANGELOG.md](./CHANGELOG.md) for release history.
 
 - 203 tests passing
-- 75.94% code coverage
+- 79.56% code coverage
 - Pyright strict mode: 0 errors
 - All 6 core trigger types fully implemented
 

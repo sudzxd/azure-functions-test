@@ -16,6 +16,14 @@ from typing import Any
 
 # Project/Local
 from .._internal import get_logger
+from ..constants import (
+    DEFAULT_RESOURCE_GROUP,
+    QUEUE_NAME_MAX_LENGTH,
+    QUEUE_NAME_MIN_LENGTH,
+    QUEUE_NAME_PATTERN,
+    RESOURCE_TYPE_TO_PROVIDER,
+    STORAGE_ACCOUNT_NAME_PATTERN,
+)
 
 # =============================================================================
 # MODULE-LEVEL LOGGER
@@ -42,12 +50,7 @@ def validate_azure_storage_name(name: str) -> bool:
         >>> validate_azure_storage_name("MyStorageAccount")
         False
     """
-    # Azure Storage naming rules:
-    # - 3-24 characters
-    # - lowercase letters and numbers only
-    # - must start with letter or number
-    pattern = r"^[a-z0-9][a-z0-9]{2,23}$"
-    return bool(re.match(pattern, name))
+    return bool(re.match(STORAGE_ACCOUNT_NAME_PATTERN, name))
 
 
 def validate_queue_name(name: str) -> bool:
@@ -65,13 +68,10 @@ def validate_queue_name(name: str) -> bool:
         >>> validate_queue_name("MyQueue")
         False
     """
-    # Azure Queue naming rules:
-    # - 3-63 characters
-    # - lowercase letters, numbers, and hyphens
-    # - cannot start or end with hyphen
-    # - cannot have consecutive hyphens
-    pattern = r"^[a-z0-9]([a-z0-9-]*[a-z0-9])?$"
-    return bool(re.match(pattern, name)) and 3 <= len(name) <= 63
+    return (
+        bool(re.match(QUEUE_NAME_PATTERN, name))
+        and QUEUE_NAME_MIN_LENGTH <= len(name) <= QUEUE_NAME_MAX_LENGTH
+    )
 
 
 # =============================================================================
@@ -94,20 +94,11 @@ def generate_azure_resource_id(resource_type: str, resource_name: str) -> str:
         '/subscriptions/.../resourceGroups/.../providers/Microsoft.Storage/storageAccounts/mystorageaccount'
     """
     subscription_id = str(uuid.uuid4())
-    resource_group = "test-resource-group"
-
-    provider_mapping = {
-        "storageAccounts": "Microsoft.Storage",
-        "topics": "Microsoft.EventGrid",
-        "namespaces": "Microsoft.ServiceBus",
-        "sites": "Microsoft.Web",
-    }
-
-    provider = provider_mapping.get(resource_type, "Microsoft.Test")
+    provider = RESOURCE_TYPE_TO_PROVIDER.get(resource_type, "Microsoft.Test")
 
     return (
         f"/subscriptions/{subscription_id}"
-        f"/resourceGroups/{resource_group}"
+        f"/resourceGroups/{DEFAULT_RESOURCE_GROUP}"
         f"/providers/{provider}"
         f"/{resource_type}/{resource_name}"
     )
@@ -163,16 +154,6 @@ def get_utc_now() -> datetime:
 
 
 # =============================================================================
-# COMMON MOCK DATA
-# =============================================================================
-
-DEFAULT_STORAGE_ACCOUNT = "teststorageaccount"
-DEFAULT_CONTAINER_NAME = "test-container"
-DEFAULT_QUEUE_NAME = "test-queue"
-DEFAULT_TOPIC_NAME = "test-topic"
-DEFAULT_SUBSCRIPTION_NAME = "test-subscription"
-
-# =============================================================================
 # FACTORY HELPERS
 # =============================================================================
 
@@ -208,9 +189,4 @@ __all__ = [
     "generate_blob_uri",
     "get_utc_now",
     "filter_none",
-    "DEFAULT_STORAGE_ACCOUNT",
-    "DEFAULT_CONTAINER_NAME",
-    "DEFAULT_QUEUE_NAME",
-    "DEFAULT_TOPIC_NAME",
-    "DEFAULT_SUBSCRIPTION_NAME",
 ]

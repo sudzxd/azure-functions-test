@@ -20,6 +20,13 @@ from pydantic.dataclasses import dataclass
 
 # Project/Local
 from .._internal import get_logger, serialize_to_bytes
+from ..constants import (
+    BATCH_MESSAGE_ID_PREFIX,
+    DEFAULT_MESSAGE_ID,
+    DEFAULT_POP_RECEIPT,
+    DEQUEUE_COUNT_DEFAULT,
+    DEQUEUE_COUNT_POISON_EXAMPLE,
+)
 from ..protocols import QueueMessageProtocol
 from .base import filter_none
 
@@ -72,13 +79,13 @@ class QueueMessageMock:
         5
     """
 
-    id: str | None = Field(default="test-message-id")
+    id: str | None = Field(default=DEFAULT_MESSAGE_ID)
     body: bytes = Field(default=b"")
-    dequeue_count: int | None = Field(default=1)
+    dequeue_count: int | None = Field(default=DEQUEUE_COUNT_DEFAULT)
     expiration_time: datetime | None = Field(default=None)
     insertion_time: datetime | None = Field(default_factory=lambda: datetime.now(UTC))
     time_next_visible: datetime | None = Field(default=None)
-    pop_receipt: str | None = Field(default="test-pop-receipt")
+    pop_receipt: str | None = Field(default=DEFAULT_POP_RECEIPT)
 
     def get_body(self) -> bytes:
         """Return message content as bytes.
@@ -202,8 +209,8 @@ def mock_queue_message(
     """
     logger.debug(
         "Creating QueueMessageMock with id=%s, dequeue_count=%s",
-        id or "test-message-id",
-        dequeue_count or 1,
+        id or DEFAULT_MESSAGE_ID,
+        dequeue_count or DEQUEUE_COUNT_DEFAULT,
     )
 
     # Serialize body if provided
@@ -230,7 +237,7 @@ def mock_queue_message(
 def create_poison_message(
     body: dict[Any, Any] | list[Any] | str | bytes | None = None,
     *,
-    dequeue_count: int = 6,
+    dequeue_count: int = DEQUEUE_COUNT_POISON_EXAMPLE,
     **kwargs: Any,
 ) -> QueueMessageProtocol:
     """Create a poison queue message (high dequeue count).
@@ -279,7 +286,7 @@ def create_batch_messages(
     return [
         mock_queue_message(
             body,
-            id=f"batch-message-{i}",
+            id=f"{BATCH_MESSAGE_ID_PREFIX}-{i}",
             **kwargs,
         )
         for i, body in enumerate(bodies)

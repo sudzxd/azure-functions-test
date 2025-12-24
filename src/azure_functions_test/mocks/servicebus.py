@@ -21,6 +21,16 @@ from pydantic.dataclasses import dataclass
 
 # Project/Local
 from .._internal import get_logger, serialize_to_bytes
+from ..constants import (
+    DEFAULT_DEAD_LETTER_DESCRIPTION,
+    DEFAULT_DEAD_LETTER_REASON,
+    DEFAULT_DEAD_LETTER_SOURCE,
+    DEFAULT_MESSAGE_ID,
+    DEFAULT_REPLY_TO_QUEUE,
+    DEFAULT_SESSION_ID,
+    SERVICE_BUS_DELIVERY_COUNT_DEFAULT,
+    SERVICE_BUS_SCHEDULED_TIME_OFFSET,
+)
 from ..protocols import ServiceBusMessageProtocol
 from .base import filter_none
 
@@ -94,7 +104,7 @@ class ServiceBusMessageMock:
         'session-1'
     """
 
-    message_id: str = Field(default="test-message-id")
+    message_id: str = Field(default=DEFAULT_MESSAGE_ID)
     body: bytes = Field(default=b"")
     session_id: str | None = Field(default=None)
     partition_key: str | None = Field(default=None)
@@ -317,7 +327,7 @@ def mock_service_bus_message(
     """
     logger.debug(
         "Creating ServiceBusMessageMock with message_id=%s",
-        message_id or "test-message-id",
+        message_id or DEFAULT_MESSAGE_ID,
     )
 
     # Serialize body if provided
@@ -367,7 +377,7 @@ def mock_service_bus_message(
 def create_session_message(
     body: dict[Any, Any] | str | bytes | None = None,
     *,
-    session_id: str = "default-session",
+    session_id: str = DEFAULT_SESSION_ID,
     partition_key: str | None = None,
     **kwargs: Any,
 ) -> ServiceBusMessageProtocol:
@@ -398,10 +408,10 @@ def create_session_message(
 def create_dead_letter_message(
     body: dict[Any, Any] | str | bytes | None = None,
     *,
-    reason: str = "ProcessingError",
-    description: str = "Message processing failed after maximum retries",
-    source: str = "original-queue",
-    delivery_count: int = 10,
+    reason: str = DEFAULT_DEAD_LETTER_REASON,
+    description: str = DEFAULT_DEAD_LETTER_DESCRIPTION,
+    source: str = DEFAULT_DEAD_LETTER_SOURCE,
+    delivery_count: int = SERVICE_BUS_DELIVERY_COUNT_DEFAULT,
     **kwargs: Any,
 ) -> ServiceBusMessageProtocol:
     """Create a dead-lettered Service Bus message.
@@ -461,7 +471,7 @@ def create_scheduled_message(
         True
     """
     if scheduled_time is None:
-        scheduled_time = datetime.now(UTC) + timedelta(hours=1)
+        scheduled_time = datetime.now(UTC) + SERVICE_BUS_SCHEDULED_TIME_OFFSET
 
     return mock_service_bus_message(
         body,
@@ -474,7 +484,7 @@ def create_request_reply_message(
     body: dict[Any, Any] | str | bytes | None = None,
     *,
     correlation_id: str | None = None,
-    reply_to: str = "response-queue",
+    reply_to: str = DEFAULT_REPLY_TO_QUEUE,
     **kwargs: Any,
 ) -> ServiceBusMessageProtocol:
     """Create a Service Bus message configured for request-reply pattern.
